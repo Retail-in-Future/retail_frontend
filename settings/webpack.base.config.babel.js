@@ -49,6 +49,18 @@ const baseConfig = {
                 }]
             })
         }, {
+            test: /\.less$/,
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: [{
+                    loader: 'css-loader',
+                }, {
+                    loader: 'postcss-loader'
+                }, {
+                    loader: 'less-loader'
+                }]
+            })
+        }, {
             test: /\.css$/,
             loaders: ['style-loader', 'css-loader', 'postcss-loader']
         }, {
@@ -59,6 +71,7 @@ const baseConfig = {
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
+                NODE_ENV: `'${environment}'`,
                 environment: `'${environment}'`
             }
         }),
@@ -69,6 +82,8 @@ const baseConfig = {
             disable: false,
         }),
         new HtmlWebpackPlugin({
+            hash: true,
+            inject: 'body',
             filename: './index.html',
             template: './template.html'
         }),

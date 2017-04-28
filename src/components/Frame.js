@@ -7,8 +7,6 @@ class Frame extends Component {
         const children = this.props.children;
         return (
             <div>
-                <h1>this is frame.</h1>
-                <Devtools/>
                 {children}
             </div>
         )
