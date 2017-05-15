@@ -8,6 +8,7 @@ class Frame extends Component {
         return (
             <div>
                 {children}
+                <Devtools/>
             </div>
         )
     }
