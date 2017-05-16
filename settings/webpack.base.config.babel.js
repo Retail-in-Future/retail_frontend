@@ -30,7 +30,7 @@ const baseConfig = {
         rules: [{
             test: /\.js$/,
             exclude: /node_modules/,
-            loaders: ["babel-loader"]
+            loaders: ["babel-loader", "eslint-loader"]
         }, {
             test: /\.scss$/,
             use: ExtractTextPlugin.extract({

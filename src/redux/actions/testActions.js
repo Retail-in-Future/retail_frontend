@@ -1,6 +1,6 @@
-import {createApiAction} from '../../reduxHelper/actionHelper'
+import { createApiAction } from '../../reduxHelper/actionHelper';
 
 export const testAction = createApiAction('test', {
-    url: '/test',
-    method: 'get'
+  url: '/test',
+  method: 'get',
 });
