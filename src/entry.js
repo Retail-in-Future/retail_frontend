@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import customMiddleWare from './reduxHelper/customMiddleWare';
 import reducers from './redux/reducers/';
-import Routers from './components/Routers.js';
+import Routers from './components/Routers';
 import devTools from './components/Devtools';
 import './styles/eric-meyer-reset.css';
 
@@ -16,8 +16,8 @@ const middleWares = compose(
 const initialState = {};
 const store = createStore(reducers, initialState, middleWares);
 ReactDom.render(
-  <Provider store={store}>
-    <Routers />
-  </Provider>,
+    <Provider store={store}>
+        <Routers />
+    </Provider>,
     document.getElementById('root'),
 );

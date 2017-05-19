@@ -1,13 +1,13 @@
 module.exports = {
     plugins: [
         require('autoprefixer')({
-            browsers: ['last 5 versions']
+            browsers: ['last 5 versions'],
         }),
         require('cssnano')({
             discardComments: {
-                removeAll: true
+                removeAll: true,
             },
-            discardUnused: false
-        })
-    ]
-}
+            discardUnused: false,
+        }),
+    ],
+};
