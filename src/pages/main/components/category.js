@@ -1,54 +1,99 @@
+import lodash from 'lodash';
 import autoBind from 'autobind-decorator';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Table, Form, Input } from 'antd';
+import { Button, Table, Form, Popconfirm } from 'antd';
 
+import {
+    setModalType,
+    getSKU,
+    getCategories,
+    deleteCategory,
+    appendCategory,
+    editCategory,
+    setEditCategoryInfo,
+} from 'src/redux/actions/categoryActions';
 import { showModal } from 'src/redux/actions/modalActions';
-import { deleteCategory } from 'src/redux/actions/categoryActions';
-import Modal from 'src/components/modal';
+import { CategoryModal } from './categoryComponents';
 import styles from './category.scss';
 
-const formItemLayout = {
-    labelCol: {
-        xs: { span: 24 },
-        sm: { span: 6 },
-    },
-    wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 14 },
-    },
-};
-
 const mapStateToProps = (state) => {
-    const tempCategory = state.category.toJS();
+    const category = state.category.toJS();
     return {
-        category: tempCategory,
+        category,
     };
 };
 
 const mapDispatchToProps = {
+    getSKU,
     showModal,
+    editCategory,
+    setModalType,
+    getCategories,
     deleteCategory,
+    appendCategory,
+    setEditCategoryInfo,
 };
 
-@Form.create()
+const mapPropsToFields = (props) => {
+    const {
+        isEdit,
+        editCategoryInfo,
+        appendCategoryInfo,
+    } = props.category;
+    const tempCategoryInfo = isEdit ? editCategoryInfo : appendCategoryInfo;
+    return lodash.forOwn(tempCategoryInfo, (value, key) => {
+        tempCategoryInfo[key] = {
+            value,
+        };
+    });
+};
+
 @connect(mapStateToProps, mapDispatchToProps)
+@Form.create({ mapPropsToFields })
 class Category extends Component {
     static propTypes = {
         showModal: PropTypes.func.isRequired,
+        setModalType: PropTypes.func.isRequired,
+        getSKU: PropTypes.func.isRequired,
+        getCategories: PropTypes.func.isRequired,
         deleteCategory: PropTypes.func.isRequired,
+        appendCategory: PropTypes.func.isRequired,
+        editCategory: PropTypes.func.isRequired,
         form: PropTypes.instanceOf(Object).isRequired,
         category: PropTypes.instanceOf(Object).isRequired,
+        setEditCategoryInfo: PropTypes.func.isRequired,
     };
+
+    componentDidMount() {
+        const { getSKU, getCategories } = this.props;
+        getCategories();
+        getSKU();
+    }
+
+    componentDidUpdate() {
+        const { category, getSKU } = this.props;
+        if (category.needRequestSKU && !category.isRequesting) {
+            getSKU();
+        }
+    }
 
     @autoBind
     createColumns() {
-        const actionRender = itemData => (
+        const actionRender = categoryInfo => (
             <p>
-                <a role="link" tabIndex="-1" onClick={this.handleDeleteCreator(itemData)}>编辑</a>
+                <a role="link" tabIndex="-1" onClick={this.handleEditCreator(categoryInfo)}>编辑</a>
                 &nbsp;|&nbsp;
-                <a role="link" tabIndex="-1" onClick={this.handleDeleteCreator(itemData)}>删除</a>
+                <Popconfirm
+                    placement="topRight"
+                    okText="确定"
+                    cancelText="取消"
+                    title="确定删除本品类？"
+                    onConfirm={this.handleDeleteCreator(categoryInfo)}
+                >
+                    <a role="link" tabIndex="-1">删除</a>
+                </Popconfirm>
             </p>
         );
         return [{
@@ -77,76 +122,68 @@ class Category extends Component {
     }
 
     @autoBind
-    createModal() {
-        const { form } = this.props;
-        const { getFieldDecorator } = form;
-        return (
-            <Form>
-                <Form.Item
-                    {...formItemLayout}
-                    label="SKU"
-                >
-                    <Input disabled value="this value created at database." />
-                </Form.Item>
-                <Form.Item
-                    {...formItemLayout}
-                    label="商品名称"
-                    hasFeedback
-                >
-                    {getFieldDecorator('productName', {
-                        rules: [{
-                            required: true, message: '请输入商品名称',
-                        }],
-                    })(
-                        <Input />,
-                    )}
-                </Form.Item>
-                <Form.Item
-                    {...formItemLayout}
-                    label="商品编号"
-                    hasFeedback
-                >
-                    {getFieldDecorator('productCode', {
-                        rules: [{
-                            required: true, message: '请输入商品编号',
-                        }],
-                    })(
-                        <Input />,
-                    )}
-                </Form.Item>
-            </Form>
-        );
-    }
-
-    @autoBind
-    handleShowModal() {
+    showModal() {
         const { showModal } = this.props;
         showModal();
     }
 
     @autoBind
-    handleDeleteCreator(itemData) {
-        const { deleteCategory } = this.props;
+    handleAppendCategory() {
+        const { setModalType } = this.props;
+        setModalType({ isEdit: false });
+        this.showModal();
+    }
+
+    @autoBind
+    handleEditCreator(categoryInfo) {
+        const { setEditCategoryInfo } = this.props;
+        const tempInfo = lodash.cloneDeep(categoryInfo);
+        const { setModalType } = this.props;
+        delete tempInfo.key;
         return () => {
-            deleteCategory(itemData);
+            setModalType({ isEdit: true });
+            setEditCategoryInfo(tempInfo);
+            this.showModal();
         };
     }
 
     @autoBind
-    handleConfirm() {
-        console.log(123);
+    handleDeleteCreator(categoryInfo) {
+        const { deleteCategory } = this.props;
+        return () => {
+            deleteCategory(categoryInfo);
+        };
+    }
+
+    @autoBind
+    handleAppendConfirm() {
+        const { form, appendCategory } = this.props;
+        const formValues = form.getFieldsValue();
+        const action = appendCategory(formValues);
+        this.setState()
+    }
+
+    @autoBind
+    handleEditConfirm() {
+        const { form, editCategory } = this.props;
+        const formValues = form.getFieldsValue();
+        editCategory(formValues);
     }
 
     render() {
-        const columns = this.createColumns();
-        const modalContent = this.createModal();
-        const { category } = this.props;
+        const { form, category } = this.props;
         const { categories } = category;
+        const columns = this.createColumns();
         return (
             <div className={styles.contentWrap}>
                 <div className={styles.tableActions}>
-                    <Button type="primary" onClick={this.handleShowModal}>添加品类</Button>
-                    <Modal title="添加品类" content={modalContent} confirmFunction={this.handleConfirm} />
+                    <Button type="primary" onClick={this.handleAppendCategory}>添加品类</Button>
+                    <CategoryModal
+                        form={form}
+                        category={category}
+                        handleEditConfirm={this.handleEditConfirm}
+                        handleAppendConfirm={this.handleAppendConfirm}
+                    />
                 </div>
                 <Table columns={columns} dataSource={categories} />
             </div>

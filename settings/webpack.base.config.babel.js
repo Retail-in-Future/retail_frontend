@@ -92,6 +92,7 @@ const baseConfig = {
             filename: '[name].js',
         }),
     ],
+    stats: { children: false },
 };
 
 export default baseConfig;
