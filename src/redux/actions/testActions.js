@@ -1,11 +1,11 @@
-import { createApiAction } from '../../reduxHelper/actionHelper';
+import { createApiAction, createNormalAction } from '../../reduxHelper/actionHelper';
 
-export const testAction = createApiAction('test', {
-    url: '/test',
+export const fetchTest = createApiAction('fetchTest', {
+    url: '/fetchTest',
     method: 'get',
 });
 
-export const addCategory = createApiAction('addCategory', {
-    url: '/baidu',
-    method: 'post',
+export const fetchTest2 = createApiAction('fetchTest2', {
+    url: '/fetchTest2',
+    method: 'get',
 });

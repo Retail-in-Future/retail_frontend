@@ -5,7 +5,7 @@ const middlewares = jsonServer.defaults()
 
 server.use(middlewares)
 
-server.use('/test', (req, res) => {
+server.use('/fetchTest', (req, res) => {
     const result = require('./resource/test')
     res.json(result);
     res.end()

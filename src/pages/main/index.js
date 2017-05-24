@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Button } from 'antd';
 
-import { testAction } from 'src/redux/actions/testActions';
+import { fetchTest } from 'src/redux/actions/testActions';
 import styles from './index.scss';
 
 const mapStateToProps = state => ({
@@ -13,13 +13,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    testAction,
+    fetchTest,
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
 class App extends Component {
     static propTypes = {
         children: PropTypes.node,
+        fetchTest: PropTypes.func.isRequired,
     };
 
     static defaultProps = {
@@ -31,13 +32,18 @@ class App extends Component {
         return menuData;
     }
 
+    @autoBind
+    handleTest() {
+        const { fetchTest } = this.props;
+        fetchTest({ name: 'pengchuan' });
+    }
+
     render() {
         const { children } = this.props;
         const { Header, Content, Footer, Sider } = Layout;
         return (
             <Layout className={styles.wrap}>
                 <Sider className={styles.sider}>
-                    <div />
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={['category']} onSelect={this.handleSelect}>
                         <Menu.Item key="category">
                             <Icon type="tags" />
@@ -56,6 +62,7 @@ class App extends Component {
                 <Layout>
                     <Header className={styles.header} />
                     <Content className={styles.content}>
+                        <Button type="primary" ghost onClick={this.handleTest}>haha</Button>
                         {children}
                     </Content>
                     <Footer className={styles.footer} />

@@ -1,3 +1,4 @@
 module.exports = {
-    name: 'tester'
+    result: 1,
+    message: 'this is fetch test message.Good luck.'
 }
