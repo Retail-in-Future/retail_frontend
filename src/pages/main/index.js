@@ -1,11 +1,12 @@
-import autobind from 'autobind-decorator';
+import autoBind from 'autobind-decorator';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import { Layout, Menu, Icon } from 'antd';
 
 import { testAction } from 'src/redux/actions/testActions';
 import styles from './index.scss';
-import Category from './components/category';
 
 const mapStateToProps = state => ({
     state,
@@ -17,13 +18,21 @@ const mapDispatchToProps = {
 
 @connect(mapStateToProps, mapDispatchToProps)
 class App extends Component {
+    static propTypes = {
+        children: PropTypes.node,
+    };
 
-    @autobind
+    static defaultProps = {
+        children: null,
+    };
+
+    @autoBind
     static handleSelect(menuData) {
         return menuData;
     }
 
     render() {
+        const { children } = this.props;
         const { Header, Content, Footer, Sider } = Layout;
         return (
             <Layout className={styles.wrap}>
@@ -47,7 +56,7 @@ class App extends Component {
                 <Layout>
                     <Header className={styles.header} />
                     <Content className={styles.content}>
-                        <Category />
+                        {children}
                     </Content>
                     <Footer className={styles.footer} />
                 </Layout>

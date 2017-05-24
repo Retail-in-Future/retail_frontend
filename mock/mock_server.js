@@ -35,6 +35,21 @@ server.use('/appendCategory', (req, res) => {
     res.send();
 })
 
+server.use('/getProductInfo', (req, res) => {
+    const result = require('./resource/productInfo')
+    res.json(result);
+    res.end()
+})
+
+server.use('/setProductPrice', (req, res) => {
+    const result = {
+        result: 1,
+        data: {}
+    };
+    res.json(result);
+    res.send();
+})
+
 server.use(router)
 
 server.listen(3000, () => {

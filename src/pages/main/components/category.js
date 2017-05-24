@@ -159,7 +159,7 @@ class Category extends Component {
     handleAppendConfirm() {
         const { form, appendCategory } = this.props;
         const formValues = form.getFieldsValue();
-        const action = appendCategory(formValues);
+        appendCategory(formValues);
         this.setState()
     }
 
