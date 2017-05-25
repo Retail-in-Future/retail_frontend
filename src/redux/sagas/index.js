@@ -46,21 +46,19 @@ function* fetchWrapper(action) {
 }
 
 function* fetchTest() {
-    while (true) {
-        const action = yield take('fetchTest');
-        const nextAction = yield call(fetchWrapper, action);
-        if (nextAction.payload instanceof Error) {
-            return;
-        }
-        yield put(testActions.fetchTest2(nextAction.payload));
+    const action = yield takeEvery('fetchTest');
+    const nextAction = yield call(fetchWrapper, action);
+    if (nextAction.payload instanceof Error) {
+        return;
     }
+    yield put(testActions.fetchTest2(nextAction.payload));
 }
 
 function* fetchTest2() {
-    while (true) {
-        const action = yield take('fetchTest2');
-        yield call(fetchWrapper, action);
-    }
+    // while (true) {
+    const action = yield take('fetchTest2');
+    yield call(fetchWrapper, action);
+    // }
 }
 
 function* sagas() {
