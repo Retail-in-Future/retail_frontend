@@ -12,7 +12,7 @@ const mixinUrl = (inputUrl, inputObject) => {
     return `${inputUrl}${hasMark ? '&' : '?'}${parameters}`;
 };
 
-export default (requestOption, requestData) => {
+const mixinFetch = (requestOption, requestData) => {
     const tempOption = lodash.cloneDeep(requestOption);
     const { url } = tempOption;
     let tempUrl = `${hostMain}${url}`;
@@ -25,4 +25,41 @@ export default (requestOption, requestData) => {
             break;
     }
     return fetch(tempUrl, tempOption);
+};
+
+export default (action) => {
+    const actionName = action.type;
+    const actionMeta = action.meta;
+    const { INFO_DATA, INFO_OPTION } = action.payload;
+    return mixinFetch(INFO_OPTION, INFO_DATA)
+        .then((response) => {
+            // 状态码判断
+            if (response.status === 200) {
+                return response.json();
+            }
+            throw (new Error('SERVICE_ERROR'));
+        })
+        .then((resolve) => {
+            console.info('Promise resolve:\n', resolve);
+            // 逻辑判断
+            return resolve.result === 1
+                ? {
+                    type: `${actionName}_SUCCESS`,
+                    payload: resolve,
+                    meta: actionMeta,
+                }
+                : {
+                    type: `${actionName}_FAIL`,
+                    payload: resolve,
+                    meta: actionMeta,
+                };
+        })
+        .catch((error) => {
+            console.warn('Promise catch:\n', error);
+            return {
+                type: 'SERVICE_ERROR',
+                payload: error,
+                meta: actionMeta,
+            };
+        });
 };

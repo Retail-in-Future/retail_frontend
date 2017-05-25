@@ -7,17 +7,14 @@ const initState = immutable.fromJS({
 });
 export default handleActions({
     fetchTest: (state, action) => {
-        debugger
         console.log('this is fetchTest.');
         return state;
     },
     fetchTest_SUCCESS: (state, action) => {
-        debugger;
         console.log('this is fetchTest_SUCCESS.');
         return state;
     },
     fetchTest_FAIL: (state, action) => {
-        debugger;
         console.log('this is fetchTest_FAIL.');
         return state;
     },
