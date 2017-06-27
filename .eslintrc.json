@@ -8,8 +8,7 @@
     "plugins": [
         "react",
         "jsx-a11y",
-        "import",
-        "redux-saga"
+        "import"
     ],
     "rules": {
         "indent": [

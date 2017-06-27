@@ -1,4 +1,5 @@
-settings/*
-mock/*
-dev-server.js
+configs
+mock
+node_modules
+package.json
 postcss.config.js

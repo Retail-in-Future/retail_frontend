@@ -4,26 +4,27 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import packageConfig from '../package.json';
 
-const vendorList = Object.keys(packageConfig.dependencies);
-const environment = process.env.environment;
+const vendors = Object.keys(packageConfig.dependencies);
 
-console.log('------------------------', environment, '------------------------');
+const absolutePath = url => path.resolve(__dirname, url)
+
+console.log('------------------------', process.env.environment, '------------------------');
 
 const baseConfig = {
     entry: {
-        vendor: vendorList,
+        vendor: vendors,
         app: ['./src/entry.js'],
     },
     output: {
+        publicPath: '/',
         filename: '[name].js',
-        path: path.resolve(__dirname, '../dist'),
-        publicPath: './',
+        path: absolutePath('../dist'),
     },
     resolve: {
         extensions: ['.js', '.json', '.scss'],
         alias: {
-            src: path.resolve(__dirname, '../src'),
-            node_modules: path.resolve(__dirname, '../node_modules'),
+            src: absolutePath('../src'),
+            node_modules: absolutePath('../node_modules'),
         },
     },
     module: {
@@ -69,11 +70,8 @@ const baseConfig = {
         }],
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: `'${environment}'`,
-                environment: `'${environment}'`,
-            },
+        new webpack.EnvironmentPlugin({
+            NODE_ENV: process.env.environment,
         }),
         new webpack.HotModuleReplacementPlugin(),
         new ExtractTextPlugin({
