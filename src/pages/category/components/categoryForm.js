@@ -1,5 +1,4 @@
 /* eslint-disable no-console,no-debugger */
-import autoBind from 'autobind-decorator';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input } from 'antd';
@@ -17,9 +16,7 @@ const formItemLayout = {
 
 @Form.create({
     mapPropsToFields: (props) => {
-        const { category } = props;
-        const { isEdit, appendCategoryInfo, editCategoryInfo } = category;
-        const categoryInfo = isEdit ? editCategoryInfo : appendCategoryInfo;
+        const { categoryInfo } = props;
         return {
             productName: {
                 value: categoryInfo.productName
@@ -32,26 +29,14 @@ const formItemLayout = {
             }
         };
     },
-    onFieldsChange: (props, fields) => {
-        console.log(fields);
-        props.setCategoryInfo({
-            productName: fields.productName.value
-        });
+    onValuesChange: (props, values) => {
+        props.setCategoryInfo(values);
     }
 })
 class CategoryForm extends React.Component {
     static propTypes = {
-        form: PropTypes.instanceOf(Object).isRequired,
-        category: PropTypes.instanceOf(Object).isRequired,
-        setCategoryInfo: PropTypes.func.isRequired
+        form: PropTypes.instanceOf(Object).isRequired
     };
-
-    @autoBind
-    handleBlur() {
-        const { form, setCategoryInfo } = this.props;
-        const tempData = form.getFieldsValue();
-        setCategoryInfo(tempData);
-    }
 
     render() {
         const { form } = this.props;
@@ -89,8 +74,7 @@ class CategoryForm extends React.Component {
                         rules: [{
                             required: true,
                             message: '请输入商品编号'
-                        }],
-                        trigger: 'onBlur'
+                        }]
                     })(
                         <Input />
                     )}

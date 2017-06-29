@@ -7,8 +7,6 @@ const appendAction = (typeCreator, actionName, options) => {
     exportActions[actionName] = typeCreator(actionName, options);
 };
 
-appendAction(createNormalAction, 'setCategoryInfo');
-
 appendAction(createApiAction, 'getCategories', {
     url: '/getCategories',
     method: 'get'
@@ -21,7 +19,17 @@ appendAction(createApiAction, 'getSKU', {
 
 appendAction(createApiAction, 'appendCategory', {
     url: '/appendCategory',
-    method: 'post'
+    method: 'get'
+});
+
+appendAction(createApiAction, 'updateCategory', {
+    url: '/updateCategory',
+    method: 'get'
+});
+
+appendAction(createApiAction, 'deleteCategory', {
+    url: '/deleteCategory',
+    method: 'get'
 });
 
 module.exports = exportActions;

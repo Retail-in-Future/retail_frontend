@@ -6,30 +6,13 @@ import immutable from 'immutable';
 const initState = immutable.fromJS({
     categories: [],
     isEdit: false,
-    appendCategoryInfo: {
-        SKU: '',
-        productName: 'pengchuan',
-        productCode: ''
-    },
-    editCategoryInfo: {
-        SKU: '',
-        productName: '',
-        productCode: ''
-    }
+    responseSKU: ''
 });
 export default handleActions({
-    setCategoryInfo: (state, action) => {
-        const isEdit = state.get('isEdit');
-        const tempPath = isEdit ? 'editCategoryInfo' : 'appendCategoryInfo';
-        return state.mergeIn([tempPath], action.payload.INFO_DATA);
-    },
     getCategories_SUCCESS: (state, action) => {
         return state.set('categories', action.payload.data);
     },
     getSKU_SUCCESS: (state, action) => {
-        return state.setIn(
-            ['appendCategoryInfo', 'SKU'],
-            action.payload.data.SKU
-        );
+        return state.set('responseSKU', action.payload.data.SKU);
     }
 }, initState);

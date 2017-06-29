@@ -1,18 +1,30 @@
 /* eslint-disable no-unused-vars */
-import { createApiAction, createNormalAction } from '../../reduxHelper/actionHelper';
+import { createNormalAction, createApiAction, createSagaAction } from '../../reduxHelper/actionHelper';
 
-export const getProductInfo = createApiAction('getProductInfo', {
+
+const exportActions = {};
+const appendAction = (typeCreator, actionName, options) => {
+    exportActions[actionName] = typeCreator(actionName, options);
+};
+
+appendAction(createApiAction, 'getProductList', {
+    url: '/getProductList',
+    method: 'get'
+});
+
+appendAction(createApiAction, 'getProductInfo', {
     url: '/getProductInfo',
     method: 'get'
 });
 
-export const setProductPrice = createApiAction('setProductPrice', {
+appendAction(createApiAction, 'setProductPrice', {
     url: '/setProductPrice',
-    method: 'post'
+    method: 'get'
 });
 
-export const appendStock = createApiAction('appendStock', {
+appendAction(createApiAction, 'appendStock', {
     url: '/appendStock',
-    method: 'post'
+    method: 'get'
 });
 
+module.exports = exportActions;

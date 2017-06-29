@@ -1,87 +1,46 @@
-/* eslint-disable no-unused-vars,react/no-unused-prop-types */
-import autoBind from 'autobind-decorator';
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Form, Input } from 'antd';
+import { Table } from 'antd';
 
-import {
-    setCategoryInfo
-} from 'src/redux/actions/categoryActions';
-
-const FormItem = Form.Item;
-const CustomizedForm = Form.create({
-    onFieldsChange(props, changedFields) {
-        props.onChange({ productName: changedFields.productName.value });
-    },
-    mapPropsToFields(props) {
-        console.log(props.fields);
-        return {
-            productName: {
-                value: props.fields.productName.toUpperCase()
-            }
-        };
-    }
-})((props) => {
-    const { getFieldDecorator } = props.form;
-    return (
-        <Form layout="inline">
-            <FormItem label="productName">
-                {getFieldDecorator('productName', {
-                    rules: [{ required: true, message: 'productName is required!' }]
-                })(<Input />)}
-            </FormItem>
-        </Form>
-    );
-});
+import { getProductList } from 'src/redux/actions/productActions';
+import columns from './components/columns';
+import styles from './index.scss';
 
 const mapStateToProps = (state) => {
-    const category = state.category.toJS();
+    const product = state.product.toJS();
     return {
-        category
+        product
     };
 };
 
 const mapDispatchToProps = {
-    setCategoryInfo
+    getProductList
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
-class Demo extends React.Component {
+class Stock extends Component {
     static propTypes = {
-        category: PropTypes.instanceOf(Object).isRequired,
-        setCategoryInfo: PropTypes.func.isRequired
+        getProductList: PropTypes.func.isRequired,
+        product: PropTypes.instanceOf(Object).isRequired
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            productName: ''
-        };
+    componentDidMount() {
+        const { getProductList } = this.props;
+        getProductList();
     }
-
-    @autoBind
-    handleFormChange(changedFields) {
-        const { setCategoryInfo } = this.props;
-        setCategoryInfo(changedFields);
-    }
-
-    // @autoBind
-    // handleFormChange(changedFields) {
-    //     this.setState(changedFields);
-    // }
 
     render() {
-        const fields = this.props.category.appendCategoryInfo;
-        // const fields = this.state;
+        const { product } = this.props;
         return (
-            <div>
-                <CustomizedForm fields={fields} onChange={this.handleFormChange} />
-                <pre className="language-bash">
-                    {JSON.stringify(fields, null, 2)}
-                </pre>
+            <div className={styles.contentWrap}>
+                <Table
+                    columns={columns}
+                    dataSource={product.productList}
+                    rowKey={item => item.sku}
+                />
             </div>
         );
     }
 }
-export default Demo;
+export default Stock;

@@ -1,15 +1,23 @@
-/* eslint-disable consistent-return,no-param-reassign,no-unused-vars */
-import { all, call, put, select, take, takeEvery, fork } from 'redux-saga/effects';
+/* eslint-disable consistent-return,no-param-reassign,no-unused-vars,camelcase */
+import { all, call, put, select, take, takeEvery, fork, takeLatest } from 'redux-saga/effects';
 
 import { fetchAction, isApiAction } from 'src/redux/sagas/sagaUtils';
+import { getSKU, getCategories } from 'src/redux/actions/categoryActions';
 
-function getSKU(action) {
-    console.log('%cthis is a saga action,you can create a work flow at here.', 'color:#FFF;font-size:16px;text-shadow:0 0 3px #2070DC;');
+function* appendCategory_SUCCESS() {
+    yield put(getSKU());
+    yield put(getCategories());
+}
+
+function* updateCategory_SUCCESS() {
+    yield put(getCategories());
 }
 
 export default function* sagas() {
     // filter api action
     yield takeEvery(action => isApiAction(action), fetchAction);
     // filter saga actions
-    yield takeEvery('getSKU', getSKU);
+    yield takeEvery('appendCategory_SUCCESS', appendCategory_SUCCESS);
+    yield takeEvery('updateCategory_SUCCESS', updateCategory_SUCCESS);
+    yield takeEvery('deleteCategory_SUCCESS', updateCategory_SUCCESS);
 }

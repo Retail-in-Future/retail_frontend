@@ -19,20 +19,20 @@ export default handleActions({
         const tempState = state.toJS();
         tempState.productList = action.payload.data;
         return immutable.fromJS(tempState);
-    },
-    getProductInfo_SUCCESS: (state, action) => {
-        const tempState = state.toJS();
-        tempState.productInfo = action.payload.data;
-        return immutable.fromJS(tempState);
-    },
-    setProductPrice_SUCCESS: (state, action) => {
-        const tempState = state.toJS();
-        tempState.productInfo.price = action.meta.INFO_DATA.price;
-        return immutable.fromJS(tempState);
-    },
-    appendStock_SUCCESS: (state, action) => {
-        const tempState = state.toJS();
-        tempState.productInfo.stock = action.meta.INFO_DATA.stock;
-        return immutable.fromJS(tempState);
     }
+    // getProductInfo_SUCCESS: (state, action) => {
+    //     const tempState = state.toJS();
+    //     tempState.productInfo = action.payload.data;
+    //     return immutable.fromJS(tempState);
+    // },
+    // setProductPrice_SUCCESS: (state, action) => {
+    //     const tempState = state.toJS();
+    //     tempState.productInfo.price = action.meta.INFO_DATA.price;
+    //     return immutable.fromJS(tempState);
+    // },
+    // appendStock_SUCCESS: (state, action) => {
+    //     const tempState = state.toJS();
+    //     tempState.productInfo.stock = action.meta.INFO_DATA.stock;
+    //     return immutable.fromJS(tempState);
+    // }
 }, initState);

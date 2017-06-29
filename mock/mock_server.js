@@ -27,12 +27,41 @@ server.use('/getCategories', (req, res) => {
 });
 
 server.use('/appendCategory', (req, res) => {
-    const result = {
-        result: 1,
-        data: {}
+    const responseData = {
+        result: 1
     };
-    res.json(result);
+    if (req.query.productCode === 'pengchuan') {
+        responseData.result = 0;
+        responseData.message = '商品编号已被占用.';
+    }
+    res.json(responseData);
     res.send();
+});
+
+server.use('/updateCategory', (req, res) => {
+    const responseData = {
+        result: 1
+    };
+    if (req.query.productCode === 'pengchuan') {
+        responseData.result = 0;
+        responseData.message = '商品编号已被占用.';
+    }
+    res.json(responseData);
+    res.send();
+});
+
+server.use('/deleteCategory', (req, res) => {
+    const responseData = {
+        result: 1
+    };
+    res.json(responseData);
+    res.send();
+});
+
+server.use('/getProductList', (req, res) => {
+    const result = require('./resource/productList');
+    res.json(result);
+    res.end()
 });
 
 server.use('/getProductInfo', (req, res) => {

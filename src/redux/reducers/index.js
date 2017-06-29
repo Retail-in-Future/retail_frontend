@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import category from './categoryReducers';
+import common from './commonReducers';
 import modal from './modalReducers';
 import product from './productReducers';
+import category from './categoryReducers';
 
 export default combineReducers({
-    category,
+    common,
     modal,
-    product
+    product,
+    category
 });

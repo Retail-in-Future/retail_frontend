@@ -57,7 +57,7 @@ export default (action) => {
         .catch((error) => {
             console.warn('Promise catch:\n', error);
             return {
-                type: 'SERVICE_ERROR',
+                type: 'showError',
                 payload: error,
                 meta: actionMeta
             };
