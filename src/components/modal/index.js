@@ -9,12 +9,12 @@ import { hideModal } from 'src/redux/actions/modalActions';
 const mapStateToProps = (state) => {
     const tempModal = state.modal.toJS();
     return {
-        modal: tempModal,
+        modal: tempModal
     };
 };
 
 const mapDispatchToProps = {
-    hideModal,
+    hideModal
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -22,17 +22,17 @@ class ModalComponent extends Component {
     static propTypes = {
         modal: PropTypes.instanceOf(Object),
         title: PropTypes.string,
-        content: PropTypes.node,
+        children: PropTypes.node,
         hideModal: PropTypes.func,
-        confirmFunction: PropTypes.func,
+        confirmFunction: PropTypes.func
     };
 
     static defaultProps = {
         modal: null,
         title: null,
-        content: null,
+        children: null,
         hideModal: null,
-        confirmFunction: null,
+        confirmFunction: null
     };
 
     @autoBind
@@ -45,13 +45,12 @@ class ModalComponent extends Component {
     handleConfirmCreator() {
         const { confirmFunction } = this.props;
         return () => {
-            confirmFunction();
-            this.handleHideModal();
+            confirmFunction && confirmFunction() && this.handleHideModal();
         };
     }
 
     render() {
-        const { title, content, modal } = this.props;
+        const { title, modal, children } = this.props;
         const tempConfirmFunction = this.handleConfirmCreator();
         return (
             <Modal
@@ -60,7 +59,7 @@ class ModalComponent extends Component {
                 onOk={tempConfirmFunction}
                 onCancel={this.handleHideModal}
             >
-                {content}
+                {children}
             </Modal>
         );
     }

@@ -7,28 +7,28 @@ import { Form, Button, Input } from 'antd';
 import {
     getProductInfo,
     setProductPrice,
-    appendStock,
+    appendStock
 } from 'src/redux/actions/productActions';
 import { showModal } from 'src/redux/actions/modalActions';
 import Modal from 'src/components/modal';
-import styles from './productDetail.scss';
+import styles from './index.scss';
 
 const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
-        sm: { span: 6 },
+        sm: { span: 6 }
     },
     wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 14 },
-    },
+        sm: { span: 14 }
+    }
 };
 
 const mapStateToProps = (state) => {
     const product = state.product.toJS();
     const { productInfo } = product;
     return {
-        productInfo,
+        productInfo
     };
 };
 
@@ -36,7 +36,7 @@ const mapDispatchToProps = {
     getProductInfo,
     setProductPrice,
     appendStock,
-    showModal,
+    showModal
 };
 
 // const mapPropsToFields = (props) => {
@@ -58,13 +58,13 @@ class ProductDetail extends Component {
         setProductPrice: PropTypes.func.isRequired,
         appendStock: PropTypes.func.isRequired,
         showModal: PropTypes.func.isRequired,
-        productInfo: PropTypes.instanceOf(Object).isRequired,
+        productInfo: PropTypes.instanceOf(Object).isRequired
     };
 
     constructor(props) {
         super(props);
         this.state = {
-            modalContentName: 'setPrice',
+            modalContentName: 'setPrice'
         };
     }
 
@@ -91,7 +91,7 @@ class ProductDetail extends Component {
                     </Form.Item>
                 </Form>
             ),
-            modalConfirm: this.handleSetPriceConfirm,
+            modalConfirm: this.handleSetPriceConfirm
         };
     }
 
@@ -113,7 +113,7 @@ class ProductDetail extends Component {
                     </Form.Item>
                 </Form>
             ),
-            modalConfirm: this.handleAppendStockConfirm,
+            modalConfirm: this.handleAppendStockConfirm
         };
     }
 

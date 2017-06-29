@@ -1,50 +1,49 @@
-import autoBind from 'autobind-decorator';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import { hashHistory } from 'react-router';
 import { connect } from 'react-redux';
-import { Layout, Menu, Icon, Button } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 
-import { fetchTest } from 'src/redux/actions/testActions';
 import styles from './index.scss';
 
-const mapStateToProps = state => ({
-    state,
-});
-
-const mapDispatchToProps = {
-    fetchTest,
+const handleSelect = ({ key }) => {
+    hashHistory.push(`/home/${key}`);
 };
 
+const mapStateToProps = state => ({
+    state
+});
+
+const mapDispatchToProps = {};
+
 @connect(mapStateToProps, mapDispatchToProps)
-class App extends Component {
+class Home extends Component {
     static propTypes = {
         children: PropTypes.node,
-        fetchTest: PropTypes.func.isRequired,
+        routes: PropTypes.instanceOf(Object)
     };
 
     static defaultProps = {
         children: null,
+        routes: []
     };
 
-    @autoBind
-    static handleSelect(menuData) {
-        return menuData;
-    }
-
-    @autoBind
-    handleTest() {
-        const { fetchTest } = this.props;
-        fetchTest({ name: 'pengchuan' });
+    constructor(props) {
+        super(props);
+        const { routes } = this.props;
+        this.state = {
+            menuKey: routes[routes.length - 1].path
+        };
     }
 
     render() {
+        const { menuKey } = this.state;
         const { children } = this.props;
-        const { Header, Content, Footer, Sider } = Layout;
+        const { Content, Footer, Sider } = Layout;
         return (
             <Layout className={styles.wrap}>
                 <Sider className={styles.sider}>
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['category']} onSelect={this.handleSelect}>
+                    <Menu theme="dark" mode="inline" defaultSelectedKeys={[menuKey]} onSelect={handleSelect}>
                         <Menu.Item key="category">
                             <Icon type="tags" />
                             <span className="nav-text">品类管理</span>
@@ -60,9 +59,7 @@ class App extends Component {
                     </Menu>
                 </Sider>
                 <Layout>
-                    <Header className={styles.header} />
                     <Content className={styles.content}>
-                        <Button type="primary" ghost onClick={this.handleTest}>haha</Button>
                         {children}
                     </Content>
                     <Footer className={styles.footer} />
@@ -71,4 +68,4 @@ class App extends Component {
         );
     }
 }
-export default App;
+export default Home;

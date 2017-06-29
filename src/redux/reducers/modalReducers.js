@@ -1,9 +1,9 @@
-/* eslint-disable no-console,no-unused-vars */
+/* eslint-disable no-unused-vars */
 import { handleActions } from 'redux-actions';
 import immutable from 'immutable';
 
 const initState = immutable.fromJS({
-    modalVisible: false,
+    modalVisible: false
 });
 export default handleActions({
     showModal: (state, action) => {
@@ -15,5 +15,5 @@ export default handleActions({
         const tempState = state.toJS();
         tempState.modalVisible = false;
         return immutable.fromJS(tempState);
-    },
+    }
 }, initState);

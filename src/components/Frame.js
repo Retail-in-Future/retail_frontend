@@ -8,17 +8,21 @@ const Frame = (props) => {
     return (
         <div>
             {children}
-            <Devtools />
+            {
+                process.env.NODE_ENV === 'development'
+                    ? <Devtools />
+                    : null
+            }
         </div>
     );
 };
 
 Frame.propTypes = {
-    children: PropTypes.node,
+    children: PropTypes.node
 };
 
 Frame.defaultProps = {
-    children: null,
+    children: null
 };
 
 export default Frame;

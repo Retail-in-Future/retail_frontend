@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import lodash from 'lodash';
 import queryString from 'query-string';
 
@@ -40,18 +41,17 @@ export default (action) => {
             throw (new Error('SERVICE_ERROR'));
         })
         .then((resolve) => {
-            console.info('Promise resolve:\n', resolve);
             // 逻辑判断
             return resolve.result === 1
                 ? {
                     type: `${actionName}_SUCCESS`,
                     payload: resolve,
-                    meta: actionMeta,
+                    meta: actionMeta
                 }
                 : {
                     type: `${actionName}_FAIL`,
                     payload: resolve,
-                    meta: actionMeta,
+                    meta: actionMeta
                 };
         })
         .catch((error) => {
@@ -59,7 +59,7 @@ export default (action) => {
             return {
                 type: 'SERVICE_ERROR',
                 payload: error,
-                meta: actionMeta,
+                meta: actionMeta
             };
         });
 };

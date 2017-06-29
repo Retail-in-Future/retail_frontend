@@ -7,3 +7,6 @@ export function* fetchAction(action) {
     yield put(nextAction);
     return nextAction;
 }
+
+export const isApiAction = value => value.payload.INFO_TYPE === 'API';
+

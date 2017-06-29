@@ -6,9 +6,9 @@ import packageConfig from '../package.json';
 
 const vendors = Object.keys(packageConfig.dependencies);
 
-const absolutePath = url => path.resolve(__dirname, url)
+const absolutePath = url => path.resolve(__dirname, url);
 
-console.log('------------------------', process.env.environment, '------------------------');
+console.log('------------------------' + process.env.environment + '------------------------');
 
 const baseConfig = {
     entry: {
@@ -31,7 +31,7 @@ const baseConfig = {
         rules: [{
             test: /\.js$/,
             exclude: /node_modules/,
-            loaders: ['babel-loader', 'eslint-loader'],
+            use: ['babel-loader', 'eslint-loader'],
         }, {
             test: /\.scss$/,
             use: ExtractTextPlugin.extract({
@@ -63,7 +63,7 @@ const baseConfig = {
             }),
         }, {
             test: /\.css$/,
-            loaders: ['style-loader', 'css-loader', 'postcss-loader'],
+            use: ['style-loader', 'css-loader', 'postcss-loader'],
         }, {
             test: /\.(png|jpg|gif)$/,
             loader: 'url-loader?limit=1000',
@@ -90,7 +90,6 @@ const baseConfig = {
             filename: '[name].js',
         }),
     ],
-    stats: { children: false },
 };
 
 export default baseConfig;

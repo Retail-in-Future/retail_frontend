@@ -1,61 +1,35 @@
-/* eslint-disable no-console,no-unused-vars */
+/* eslint-disable no-unused-vars */
 import lodash from 'lodash';
 import { handleActions } from 'redux-actions';
 import immutable from 'immutable';
 
 const initState = immutable.fromJS({
     categories: [],
+    isEdit: false,
     appendCategoryInfo: {
         SKU: '',
-        productName: '',
-        productCode: '',
+        productName: 'pengchuan',
+        productCode: ''
     },
     editCategoryInfo: {
         SKU: '',
         productName: '',
-        productCode: '',
-    },
-    isRequesting: false,
-    needRequestSKU: true,
-    isEdit: false,
+        productCode: ''
+    }
 });
 export default handleActions({
-    setModalType: (state, action) => {
-        const fieldObject = action.payload.INFO_DATA;
-        return state.mergeDeep(fieldObject);
-    },
-    setEditCategoryInfo: (state, action) => {
-        const tempState = state.toJS();
-        tempState.editCategoryInfo = action.payload.INFO_DATA;
-        return immutable.fromJS(tempState);
+    setCategoryInfo: (state, action) => {
+        const isEdit = state.get('isEdit');
+        const tempPath = isEdit ? 'editCategoryInfo' : 'appendCategoryInfo';
+        return state.mergeIn([tempPath], action.payload.INFO_DATA);
     },
     getCategories_SUCCESS: (state, action) => {
-        const tempState = state.toJS();
-        tempState.categories = action.payload.data;
-        return immutable.fromJS(tempState);
-    },
-    getSKU: (state, action) => {
-        const tempState = state.toJS();
-        tempState.isRequesting = true;
-        const { appendCategoryInfo } = tempState;
-        appendCategoryInfo.SKU = '';
-        appendCategoryInfo.productName = '';
-        appendCategoryInfo.productCode = '';
-        return immutable.fromJS(tempState);
+        return state.set('categories', action.payload.data);
     },
     getSKU_SUCCESS: (state, action) => {
-        const tempState = state.toJS();
-        tempState.isRequesting = false;
-        tempState.needRequestSKU = false;
-        tempState.appendCategoryInfo.SKU = action.payload.data.SKU;
-        return immutable.fromJS(tempState);
-    },
-    appendCategory_SUCCESS: (state, action) => {
-        const tempState = state.toJS();
-        tempState.isRequesting = false;
-        tempState.needRequestSKU = true;
-        return immutable.fromJS(tempState);
-    },
-    editCategory: (state, action) => state,
-    editCategory_SUCCESS: (state, action) => state,
+        return state.setIn(
+            ['appendCategoryInfo', 'SKU'],
+            action.payload.data.SKU
+        );
+    }
 }, initState);

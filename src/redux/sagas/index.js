@@ -1,26 +1,15 @@
-/* eslint-disable no-console,consistent-return,no-param-reassign */
+/* eslint-disable consistent-return,no-param-reassign,no-unused-vars */
 import { all, call, put, select, take, takeEvery, fork } from 'redux-saga/effects';
 
-import fetchAction from 'src/redux/sagas/sagaUtils';
-import * as testActions from 'src/redux/actions/testActions';
+import { fetchAction, isApiAction } from 'src/redux/sagas/sagaUtils';
 
-function* fetchTest() {
-    const action = yield takeEvery('fetchTest');
-    const nextAction = yield call(fetchAction, action);
-    if (nextAction.payload instanceof Error) {
-        return;
-    }
-    yield put(testActions.fetchTest2(nextAction.payload));
-}
-
-function* fetchTest2() {
-    const action = yield takeEvery('fetchTest2');
-    yield call(fetchAction, action);
+function getSKU(action) {
+    console.log('%cthis is a saga action,you can create a work flow at here.', 'color:#FFF;font-size:16px;text-shadow:0 0 3px #2070DC;');
 }
 
 export default function* sagas() {
-    yield all([
-        fork(fetchTest),
-        fork(fetchTest2),
-    ]);
+    // filter api action
+    yield takeEvery(action => isApiAction(action), fetchAction);
+    // filter saga actions
+    yield takeEvery('getSKU', getSKU);
 }

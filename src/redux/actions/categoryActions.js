@@ -1,30 +1,43 @@
-import { createApiAction, createNormalAction } from '../../reduxHelper/actionHelper';
+/* eslint-disable no-unused-vars */
+import { createNormalAction, createApiAction, createSagaAction } from '../../reduxHelper/actionHelper';
 
-export const setModalType = createNormalAction('setModalType');
 
-export const setEditCategoryInfo = createNormalAction('setEditCategoryInfo');
+const exportActions = {};
+const appendAction = (typeCreator, actionName, options) => {
+    exportActions[actionName] = typeCreator(actionName, options);
+};
 
-export const getSKU = createApiAction('getSKU', {
-    url: '/getSKU',
-    method: 'post',
-});
+appendAction(createNormalAction, 'setCategoryInfo');
 
-export const getCategories = createApiAction('getCategories', {
+appendAction(createApiAction, 'getCategories', {
     url: '/getCategories',
-    method: 'get',
+    method: 'get'
 });
 
-export const appendCategory = createApiAction('appendCategory', {
+appendAction(createApiAction, 'getSKU', {
+    url: '/getSKU',
+    method: 'get'
+});
+
+appendAction(createApiAction, 'appendCategory', {
     url: '/appendCategory',
-    method: 'post',
+    method: 'post'
 });
 
-export const deleteCategory = createApiAction('deleteCategory', {
-    url: '/deleteCategory',
-    method: 'post',
-});
+module.exports = exportActions;
 
-export const editCategory = createApiAction('editCategory', {
-    url: '/editCategory',
-    method: 'post',
-});
+// export const getSKU = createApiAction('getSKU', {
+//     url: '/getSKU',
+//     method: 'get',
+// });
+//
+// export const getCategories = createSagaAction('getCategories', {
+//     url: '/getCategories',
+//     method: 'get',
+// });
+//
+// export const appendCategory = createApiAction('appendCategory', {
+//     url: '/appendCategory',
+//     method: 'post',
+// });
+

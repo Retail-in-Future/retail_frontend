@@ -4,21 +4,18 @@ import { createAction } from 'redux-actions';
 //     url: 'http://www.baidu.com',
 //     method: 'get'
 // }
-export const createApiAction = (actionName, requestOption) => {
+const actionCreatorGenerator = INFO_TYPE => (actionName, requestOption) => {
     const payloadCreator = parameters => ({
-        INFO_TYPE: 'API',
+        INFO_TYPE,
         INFO_OPTION: requestOption,
-        INFO_DATA: parameters,
+        INFO_DATA: parameters
     });
     const metaCreator = parameters => parameters;
     return createAction(actionName, payloadCreator, metaCreator);
 };
 
-export const createNormalAction = (actionName) => {
-    const payloadCreator = parameters => ({
-        INFO_TYPE: 'NORMAL',
-        INFO_DATA: parameters,
-    });
-    const metaCreator = parameters => parameters;
-    return createAction(actionName, payloadCreator, metaCreator);
-};
+export const createNormalAction = actionCreatorGenerator('NORMAL');
+
+export const createApiAction = actionCreatorGenerator('API');
+
+export const createSagaAction = actionCreatorGenerator('SAGA');

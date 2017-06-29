@@ -1,17 +1,18 @@
+/* eslint-disable no-unused-vars */
 import { createApiAction, createNormalAction } from '../../reduxHelper/actionHelper';
 
 export const getProductInfo = createApiAction('getProductInfo', {
     url: '/getProductInfo',
-    method: 'get',
+    method: 'get'
 });
 
 export const setProductPrice = createApiAction('setProductPrice', {
     url: '/setProductPrice',
-    method: 'post',
+    method: 'post'
 });
 
 export const appendStock = createApiAction('appendStock', {
     url: '/appendStock',
-    method: 'post',
+    method: 'post'
 });
 

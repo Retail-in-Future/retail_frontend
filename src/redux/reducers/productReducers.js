@@ -1,4 +1,4 @@
-/* eslint-disable no-console,no-unused-vars */
+/* eslint-disable no-unused-vars */
 import lodash from 'lodash';
 import { handleActions } from 'redux-actions';
 import immutable from 'immutable';
@@ -11,8 +11,8 @@ const initState = immutable.fromJS({
         SKU: 'SKU_123456789',
         sold: 84,
         stock: 34,
-        price: 20000,
-    },
+        price: 20000
+    }
 });
 export default handleActions({
     getProductList_SUCCESS: (state, action) => {
@@ -34,5 +34,5 @@ export default handleActions({
         const tempState = state.toJS();
         tempState.productInfo.stock = action.meta.INFO_DATA.stock;
         return immutable.fromJS(tempState);
-    },
+    }
 }, initState);

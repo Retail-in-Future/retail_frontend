@@ -4,8 +4,8 @@ import ReactDom from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
+import 'antd/dist/antd.less';
 
-// import customMiddleWare from './reduxHelper/customMiddleWare';
 import reducers from './redux/reducers/';
 import sagas from './redux/sagas/';
 import Routers from './components/Routers';
