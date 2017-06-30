@@ -2,27 +2,17 @@ import autoBind from 'autobind-decorator';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Form, Button, Input } from 'antd';
+import { Button } from 'antd';
 
 import {
     getProductInfo,
     setProductPrice,
     appendStock
 } from 'src/redux/actions/productActions';
-import { showModal } from 'src/redux/actions/modalActions';
 import Modal from 'src/components/modal';
+import { showModal } from 'src/redux/actions/modalActions';
+import AppendStock from './components/appendStock';
 import styles from './index.scss';
-
-const formItemLayout = {
-    labelCol: {
-        xs: { span: 24 },
-        sm: { span: 6 }
-    },
-    wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 14 }
-    }
-};
 
 const mapStateToProps = (state) => {
     const product = state.product.toJS();
@@ -39,82 +29,25 @@ const mapDispatchToProps = {
     showModal
 };
 
-// const mapPropsToFields = (props) => {
-//     const tempProductInfo = Object.assign({}, props.productInfo);
-//     return lodash.forOwn(tempProductInfo, (value, key) => {
-//         tempProductInfo[key] = {
-//             value,
-//         };
-//     });
-// };
-
 @connect(mapStateToProps, mapDispatchToProps)
-@Form.create()
 class ProductDetail extends Component {
     static propTypes = {
-        form: PropTypes.instanceOf(Object).isRequired,
         params: PropTypes.instanceOf(Object).isRequired,
         getProductInfo: PropTypes.func.isRequired,
-        setProductPrice: PropTypes.func.isRequired,
-        appendStock: PropTypes.func.isRequired,
-        showModal: PropTypes.func.isRequired,
-        productInfo: PropTypes.instanceOf(Object).isRequired
+        productInfo: PropTypes.instanceOf(Object).isRequired,
+        showModal: PropTypes.func.isRequired
     };
 
     constructor(props) {
         super(props);
         this.state = {
-            modalContentName: 'setPrice'
+            modalContentName: ''
         };
     }
 
     componentDidMount() {
         const { params, getProductInfo } = this.props;
         getProductInfo(params);
-    }
-
-    @autoBind
-    setPriceModalRender() {
-        const { form } = this.props;
-        return {
-            modalTitle: '修改售价',
-            modalContent: (
-                <Form>
-                    <Form.Item
-                        {...formItemLayout}
-                        label="售价"
-                        hasFeedback
-                    >
-                        {form.getFieldDecorator('price')(
-                            <Input />,
-                        )}
-                    </Form.Item>
-                </Form>
-            ),
-            modalConfirm: this.handleSetPriceConfirm
-        };
-    }
-
-    @autoBind
-    appendStockModalRender() {
-        const { form } = this.props;
-        return {
-            modalTitle: '添加库存',
-            modalContent: (
-                <Form>
-                    <Form.Item
-                        {...formItemLayout}
-                        label="库存"
-                        hasFeedback
-                    >
-                        {form.getFieldDecorator('stock')(
-                            <Input />,
-                        )}
-                    </Form.Item>
-                </Form>
-            ),
-            modalConfirm: this.handleAppendStockConfirm
-        };
     }
 
     @autoBind
@@ -126,29 +59,9 @@ class ProductDetail extends Component {
         };
     }
 
-    @autoBind
-    handleSetPriceConfirm() {
-        const { setProductPrice, form } = this.props;
-        const price = form.getFieldValue('price');
-        setProductPrice({ price });
-    }
-
-    @autoBind
-    handleAppendStockConfirm() {
-        const { appendStock, form } = this.props;
-        const stock = form.getFieldValue('stock');
-        appendStock({ stock });
-    }
-
     render() {
-        let modalInfo;
         const { modalContentName } = this.state;
         const { productInfo } = this.props;
-        if (modalContentName === 'setPrice') {
-            modalInfo = this.setPriceModalRender();
-        } else if (modalContentName === 'appendStock') {
-            modalInfo = this.appendStockModalRender();
-        }
         return (
             <div className={styles.contentWrap}>
                 <div className={styles.imageWrap}>
@@ -190,11 +103,18 @@ class ProductDetail extends Component {
                         >添加库存</Button>
                     </li>
                 </ul>
-                <Modal
-                    title={modalInfo.modalTitle}
-                    content={modalInfo.modalContent}
-                    confirmFunction={modalInfo.modalConfirm}
-                />
+                {
+                    modalContentName === 'appendStock'
+                        ? <AppendStock />
+                        : null
+                }
+                {
+                    modalContentName === 'setPrice'
+                        ? <Modal >
+                            <p>hahaha</p>
+                        </Modal>
+                        : null
+                }
             </div>
         );
     }

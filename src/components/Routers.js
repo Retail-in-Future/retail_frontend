@@ -13,7 +13,7 @@ const Routers = () => (
             <Route path="home" component={Home}>
                 <Route path="category" component={Category} />
                 <Route path="stock" component={Stock} />
-                <Route path="stock/productDetail/:SKU" component={ProductDetail} />
+                <Route path="stock/productDetail/:sku" component={ProductDetail} />
             </Route>
         </Route>
     </Router>
