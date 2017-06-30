@@ -8,7 +8,7 @@ const vendors = Object.keys(packageConfig.dependencies);
 
 const absolutePath = url => path.resolve(__dirname, url);
 
-console.log('------------------------' + process.env.environment + '------------------------');
+console.log('------------------------' + process.env.NODE_ENV + '------------------------');
 
 const baseConfig = {
     entry: {
@@ -23,8 +23,7 @@ const baseConfig = {
     resolve: {
         extensions: ['.js', '.json', '.scss'],
         alias: {
-            src: absolutePath('../src'),
-            node_modules: absolutePath('../node_modules'),
+            src: absolutePath('../src')
         },
     },
     module: {
@@ -53,13 +52,7 @@ const baseConfig = {
             test: /\.less$/,
             use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: [{
-                    loader: 'css-loader',
-                }, {
-                    loader: 'postcss-loader',
-                }, {
-                    loader: 'less-loader',
-                }],
+                use: ['css-loader', 'postcss-loader', 'less-loader'],
             }),
         }, {
             test: /\.css$/,
@@ -71,7 +64,7 @@ const baseConfig = {
     },
     plugins: [
         new webpack.EnvironmentPlugin({
-            NODE_ENV: process.env.environment,
+            NODE_ENV: process.env.NODE_ENV,
         }),
         new webpack.HotModuleReplacementPlugin(),
         new ExtractTextPlugin({
