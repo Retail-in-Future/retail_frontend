@@ -3,3 +3,5 @@ mock
 node_modules
 package.json
 postcss.config.js
+__mocks__
+__tests__

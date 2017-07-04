@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Form, Steps, Input, Icon } from 'antd';
 
-import styles from './appendStock.scss';
+import styles from './appendStock.css';
 
 const formItemLayout = {
     labelCol: {
@@ -25,6 +25,7 @@ class AppendStock extends Component {
         const { form } = this.props;
         return (
             <Modal
+                visible
                 title="商品上货"
                 onOk={this.handleOk}
                 onCancel={this.handleCancel}

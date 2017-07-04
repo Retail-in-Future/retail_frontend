@@ -3,17 +3,17 @@ import { handleActions } from 'redux-actions';
 import immutable from 'immutable';
 
 const initState = immutable.fromJS({
-    modalVisible: false
+    visible: false
 });
 export default handleActions({
     showModal: (state, action) => {
         const tempState = state.toJS();
-        tempState.modalVisible = true;
+        tempState.visible = true;
         return immutable.fromJS(tempState);
     },
     hideModal: (state, action) => {
         const tempState = state.toJS();
-        tempState.modalVisible = false;
+        tempState.visible = false;
         return immutable.fromJS(tempState);
     }
 }, initState);

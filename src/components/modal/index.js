@@ -28,7 +28,7 @@ class ModalComponent extends Component {
     };
 
     static defaultProps = {
-        modal: null,
+        modal: {},
         title: null,
         children: null,
         hideModal: null,
@@ -55,7 +55,7 @@ class ModalComponent extends Component {
         return (
             <Modal
                 title={title}
-                visible={modal.modalVisible}
+                visible={modal.visible}
                 onOk={tempConfirmFunction}
                 onCancel={this.handleHideModal}
             >

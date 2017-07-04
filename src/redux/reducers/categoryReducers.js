@@ -1,18 +1,19 @@
 /* eslint-disable no-unused-vars */
 import lodash from 'lodash';
 import { handleActions } from 'redux-actions';
-import immutable from 'immutable';
+import immutable, { Map } from 'immutable';
 
-const initState = immutable.fromJS({
+const initState = new Map({
     categories: [],
     isEdit: false,
     responseSKU: ''
 });
-export default handleActions({
+export const reducersMap = {
     getCategories_SUCCESS: (state, action) => {
         return state.set('categories', action.payload.data);
     },
     getSKU_SUCCESS: (state, action) => {
         return state.set('responseSKU', action.payload.data.SKU);
     }
-}, initState);
+};
+export default handleActions(reducersMap, initState);
