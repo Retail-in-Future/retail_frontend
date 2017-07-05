@@ -1,4 +1,9 @@
 #!/usr/bin/env groovy
 node {
-    echo 'pengchuan'
+    stage('Resolve Dependencies') {
+        yarn install
+    }
+    stage('Test') {
+        yarn test
+    }
 }
