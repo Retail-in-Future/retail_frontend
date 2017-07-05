@@ -1,9 +1,9 @@
 #!/usr/bin/env groovy
 node {
     stage('Resolve Dependencies') {
-        yarn install
+        sh 'yarn install'
     }
     stage('Test') {
-        yarn test
+        sh 'yarn test'
     }
 }
