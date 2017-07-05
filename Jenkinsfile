@@ -1,9 +1,16 @@
-#!/usr/bin/env groovy
-node {
-    stage('Build') {
-        yarn install
-    }
-    stage('Test') {
-        yarn test
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                yarn install
+            }
+        }
+        stage('Test') {
+            steps {
+                yarn test
+            }
+        }
     }
 }
