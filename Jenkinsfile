@@ -5,9 +5,14 @@ pipeline {
         nodejs 'node_V6.11.0'
     }
     stages {
-        stage('Example') {
+        stage('Resolve dependencies.') {
             steps {
                 sh 'yarn install'
+            }
+        }
+        stage('Run unit test.') {
+            steps {
+                sh 'yarn test'
             }
         }
     }
