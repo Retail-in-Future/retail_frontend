@@ -1,9 +1,14 @@
 #!/usr/bin/env groovy
-node {
-    stage('Resolve Dependencies') {
-        sh 'yarn install'
+pipeline {
+    agent any
+    tools {
+        nodejs 'Node 6.x'
     }
-    stage('Test') {
-        sh 'yarn test'
+    stages {
+        stage('Example') {
+            steps {
+                sh 'npm --version'
+            }
+        }
     }
 }
