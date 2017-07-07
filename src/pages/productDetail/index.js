@@ -111,7 +111,7 @@ class ProductDetail extends Component {
                 {
                     modalContentName === 'setPrice'
                         ? <Modal >
-                            <p>hahaha</p>
+                            <p>this is an input to set price.</p>
                         </Modal>
                         : null
                 }
