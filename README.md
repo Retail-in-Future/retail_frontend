@@ -1,11 +1,12 @@
-# react
-This is a simple project which used:
-- react
-- redux
-
-##### how to run this
+##### how to run this project
 ```
-npm install
-npm run test
+step 1:
+yarn install
+yarn start
+
+step 2:
+cd mock_server
+yarn install
+yarn start
 ```
 
