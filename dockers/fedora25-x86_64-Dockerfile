@@ -1,0 +1,14 @@
+FROM fedora:25
+
+RUN curl -o /etc/yum.repos.d/yarn.repo https://dl.yarnpkg.com/rpm/yarn.repo
+RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+RUN dnf install -y yarn findutils
+
+ENV PROJECT_PATH=/root/project
+
+WORKDIR $PROJECT_PATH
+COPY ./ retail_frontend/
+
+WORKDIR $PROJECT_PATH/retail_frontend
+RUN rm -f yarn.lock
+RUN npm install cross-env jest
