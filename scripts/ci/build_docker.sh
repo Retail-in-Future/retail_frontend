@@ -1,16 +1,5 @@
 #!/bin/bash
 #
-# SCRIPT: build_docker 
-# AUTHOR: Tang Cheng
-# DATE:   2017/07/17
-# REV:    1.0.D (Valid are A, B, D, T, Q, and P)
-#               (For Alpha, Beta, Dev, Test, QA, and Production)
-#
-# PLATFORM: Linux
-#
-# PURPOSE: Build a docker for environment that test will be run.
-# 
-#
 # set -n   # Uncomment to check script syntax, without execution.
 #          # NOTE: Do not forget to put the # comment back in or
 #          #       the shell script will never execute!
@@ -32,10 +21,12 @@ echo -e "$top_dir"
 #               BEGINNING OF MAIN
 ##########################################################
 
-pushd $topdir
+pushd $top_dir
 
 app_name=$(basename $(pwd))
 docker_image_id=`echo "local/${app_name}:latest" | tr "[:upper:]" "[:lower:]"`
 docker build -t $docker_image_id -f dockers/fedora25-x86_64-Dockerfile .
+
+popd
 
 # End of script
