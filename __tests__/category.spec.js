@@ -1,15 +1,8 @@
-import immutable, { isImmutable, Map } from 'immutable';
-import React from 'react';
-import configStore from 'redux-mock-store';
-import { mount, render, shallow } from 'enzyme';
-import toJSON from 'enzyme-to-json';
-import { Provider } from 'react-redux';
+import { Map } from 'immutable';
 
 import actions from 'src/redux/actions/categoryActions';
 import { reducersMap } from 'src/redux/reducers/categoryReducers';
 
-const middlewares = [];
-const storeCreator = configStore(middlewares);
 
 describe('Category actions.', () => {
     // tests for actions
