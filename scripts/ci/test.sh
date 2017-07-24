@@ -30,6 +30,7 @@ docker run -i -e DOCKER_HOST_USERID="$(id -u):$(id -g)" --rm $docker_image_id /b
 set -o errexit -o nounset \
 \
 && yarn install \
+&& yarn lint \
 && yarn test \
 EOF
 
