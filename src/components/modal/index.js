@@ -45,7 +45,8 @@ class ModalComponent extends Component {
     handleConfirmCreator() {
         const { confirmFunction } = this.props;
         return () => {
-            confirmFunction && confirmFunction() && this.handleHideModal();
+            confirmFunction && confirmFunction();
+            this.handleHideModal();
         };
     }
 

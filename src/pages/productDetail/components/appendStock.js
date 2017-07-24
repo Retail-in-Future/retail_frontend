@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Form, Steps, Input, Icon } from 'antd';
+import { Form, Steps, Input, Icon } from 'antd';
+import Modal from 'src/components/modal';
 
 import styles from './appendStock.css';
 
