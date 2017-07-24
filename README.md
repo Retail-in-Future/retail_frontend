@@ -4,7 +4,7 @@
 
 ## Getting started
 
-You can simply run the following commands to start the application and visit it through `localhost:9000`:
+You can simply run the following commands to start the application and visit it through `localhost:5000`:
 
 ```bash
 yarn install
