@@ -1,1 +1,1 @@
-export const testSelector = state => state.test;
+export default state => state.test;

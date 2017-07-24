@@ -1,1 +1,1 @@
-export default (prev, next) => prev + next
+export default (prev, next) => prev + next;

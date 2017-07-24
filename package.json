@@ -6,7 +6,7 @@
     "scripts": {
         "start": "cross-env NODE_ENV=development webpack-dev-server --config ./configs/webpack.development.config.babel.js",
         "prebuild": "rm -rf dist",
-        "lint": "eslint **/*.js",
+        "lint": "eslint src test --ext .js,.jsx",
         "build": "cross-env NODE_ENV=production webpack --config ./configs/webpack.production.config.babel.js",
         "test": "jest --no-cache",
         "clear": "jest --updateSnapshot"
