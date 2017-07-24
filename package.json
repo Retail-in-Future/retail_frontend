@@ -8,7 +8,7 @@
         "prebuild": "rm -rf dist",
         "lint": "eslint **/*.js",
         "build": "cross-env NODE_ENV=production webpack --config ./configs/webpack.production.config.babel.js",
-        "test": "cross-env NODE_ENV=test jest --no-cache",
+        "test": "jest --no-cache",
         "clear": "jest --updateSnapshot"
     },
     "keywords": [
