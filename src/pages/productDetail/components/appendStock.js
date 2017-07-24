@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Steps, Input, Icon } from 'antd';
 import Modal from 'src/components/modal';
-
 import styles from './appendStock.css';
 
 const formItemLayout = {
@@ -22,34 +21,86 @@ class AppendStock extends Component {
         form: PropTypes.instanceOf(Object).isRequired
     };
 
+    constructor() {
+        super();
+        this.state = { currentStep: 1 };
+    }
+
+    handleOk = () => {
+        if (this.state.currentStep === 1) {
+            if (this.isValidationFailed()) return true;
+            const stock = this.props.form.getFieldValue('stock');
+            this.setState({ appendedStock: stock });
+
+            this.setState({
+                currentStep: 2
+            });
+            return true;
+        }
+
+        return false;
+    }
+
+    afterClose = () => {
+        this.setState({
+            currentStep: 1
+        });
+    }
+
+    isValidationFailed = () => {
+        let isValidationFailed = false;
+        this.props.form.validateFields((err) => {
+            if (err) {
+                isValidationFailed = true;
+            }
+        });
+        return isValidationFailed;
+    }
+
+    stockValidationRule =(rule, value = '', callback) => {
+        const inputValue = value.trim();
+        if (!!inputValue && (Number.isInteger(parseInt(inputValue, 10)) && inputValue > 0)) {
+            return callback();
+        }
+
+        return callback('请输入大于0的整数');
+    }
+
     render() {
         const { form } = this.props;
+        let body;
+        if (this.state.currentStep === 1) {
+            body = (<Form>
+                <Form.Item
+                    {...formItemLayout}
+                    label="数量"
+                    hasFeedback
+                >
+                    {form.getFieldDecorator('stock', {
+                        rules: [{
+                            validator: this.stockValidationRule
+                        }]
+                    })(
+                        <Input />,
+                    )}
+                </Form.Item>
+            </Form>);
+        } else if (this.state.currentStep === 2) {
+            body = (<p>{this.state.appendedStock}</p>);
+        }
         return (
             <Modal
-                visible
                 title="商品上货"
-                onOk={this.handleOk}
-                onCancel={this.handleCancel}
+                confirmFunction={this.handleOk}
+                afterCloseFunction={this.afterClose}
             >
                 <div className={styles.stepsWrap}>
-                    <Steps>
-                        <Steps.Step status="process" title="输入上货数量" icon={<Icon type="user" />} />
-                        <Steps.Step status="wait" title="开始上货" icon={<Icon type="smile-o" />} />
+                    <Steps current={this.state.currentStep}>
+                        <Steps.Step title="输入上货数量" icon={<Icon type="user" />} />
+                        <Steps.Step title="开始上货" icon={<Icon type="smile-o" />} />
                     </Steps>
                 </div>
-                <div className={styles.formWrap}>
-                    <Form>
-                        <Form.Item
-                            {...formItemLayout}
-                            label="数量"
-                            hasFeedback
-                        >
-                            {form.getFieldDecorator('price')(
-                                <Input />,
-                            )}
-                        </Form.Item>
-                    </Form>
-                </div>
+                <div className={styles.formWrap}>{body}</div>
             </Modal>
         );
     }

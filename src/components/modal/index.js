@@ -24,7 +24,8 @@ class ModalComponent extends Component {
         title: PropTypes.string,
         children: PropTypes.node,
         hideModal: PropTypes.func,
-        confirmFunction: PropTypes.func
+        confirmFunction: PropTypes.func,
+        afterCloseFunction: PropTypes.func
     };
 
     static defaultProps = {
@@ -32,7 +33,8 @@ class ModalComponent extends Component {
         title: null,
         children: null,
         hideModal: null,
-        confirmFunction: null
+        confirmFunction: null,
+        afterCloseFunction: () => {}
     };
 
     @autoBind
@@ -45,13 +47,12 @@ class ModalComponent extends Component {
     handleConfirmCreator() {
         const { confirmFunction } = this.props;
         return () => {
-            confirmFunction && confirmFunction();
-            this.handleHideModal();
+            confirmFunction && !confirmFunction() && this.handleHideModal();
         };
     }
 
     render() {
-        const { title, modal, children } = this.props;
+        const { title, modal, children, afterCloseFunction } = this.props;
         const tempConfirmFunction = this.handleConfirmCreator();
         return (
             <Modal
@@ -59,6 +60,7 @@ class ModalComponent extends Component {
                 visible={modal.visible}
                 onOk={tempConfirmFunction}
                 onCancel={this.handleHideModal}
+                afterClose={afterCloseFunction}
             >
                 {children}
             </Modal>
