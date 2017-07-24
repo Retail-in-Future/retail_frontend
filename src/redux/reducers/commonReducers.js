@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { handleActions } from 'redux-actions';
 import immutable from 'immutable';
 
@@ -13,7 +12,7 @@ export default handleActions({
         return state.setIn(['errorTips', 'visible'], true)
             .setIn(['errorTips', 'message'], action.payload);
     },
-    hideError: (state, action) => {
+    hideError: (state) => {
         return state.setIn(['errorTips', 'visible'], false)
             .setIn(['errorTips', 'message'], '');
     }

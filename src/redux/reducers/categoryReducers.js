@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import lodash from 'lodash';
 import { handleActions } from 'redux-actions';
 import immutable, { Map } from 'immutable';
 
