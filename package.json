@@ -8,8 +8,8 @@
         "prebuild": "rm -rf dist",
         "lint": "eslint **/*.js",
         "build": "cross-env NODE_ENV=production webpack --config ./configs/webpack.production.config.babel.js",
-        "test": "cross-env NODE_ENV=test jest --no-cache --config jest.config.json",
-        "clear": "jest --updateSnapshot --config jest.config.json"
+        "test": "cross-env NODE_ENV=test jest --no-cache",
+        "clear": "jest --updateSnapshot"
     },
     "keywords": [
         "react"
@@ -78,5 +78,17 @@
         "redux-devtools-log-monitor": "^1.2.0",
         "redux-saga": "^0.15.3",
         "whatwg-fetch": "^2.0.2"
+    },
+    "jest": {
+        "roots": [
+            "./__tests__"
+        ],
+        "moduleNameMapper": {
+            "\\.(css|scss|less|sass)$": "identity-obj-proxy",
+            "\\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+        },
+        "transform": {
+            "^.+\\.js$": "babel-jest"
+        }
     }
 }
