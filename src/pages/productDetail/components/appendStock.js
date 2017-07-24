@@ -18,7 +18,9 @@ const formItemLayout = {
 @Form.create()
 class AppendStock extends Component {
     static propTypes = {
-        form: PropTypes.instanceOf(Object).isRequired
+        form: PropTypes.instanceOf(Object).isRequired,
+        params: PropTypes.instanceOf(Object).isRequired,
+        stock: PropTypes.instanceOf(Number).isRequired
     };
 
     constructor() {
@@ -35,10 +37,20 @@ class AppendStock extends Component {
             this.setState({
                 currentStep: 2
             });
+            const sseUrl = `http://localhost:8080/sse/products/${this.props.params.sku}/stock`;
+            this.receiveServerEvent(sseUrl);
             return true;
         }
 
         return false;
+    }
+
+    receiveServerEvent(sseUrl) {
+        const source = new EventSource(sseUrl);
+        source.onmessage = (event) => {
+            const newAppendedStock = event.data - this.props.stock;
+            this.setState({ newAppendedStock });
+        };
     }
 
     afterClose = () => {
@@ -86,7 +98,7 @@ class AppendStock extends Component {
                 </Form.Item>
             </Form>);
         } else if (this.state.currentStep === 2) {
-            body = (<p>{this.state.appendedStock}</p>);
+            body = (<p>{this.state.newAppendedStock}/{this.state.appendedStock}</p>);
         }
         return (
             <Modal

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
+import Loading from 'src/components/loading';
 
 import {
     getProductInfo,
@@ -30,6 +31,7 @@ const mapDispatchToProps = {
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
+@Loading({ key: 'productInfo' })
 class ProductDetail extends Component {
     static propTypes = {
         params: PropTypes.instanceOf(Object).isRequired,
@@ -105,7 +107,10 @@ class ProductDetail extends Component {
                 </ul>
                 {
                     modalContentName === 'appendStock'
-                        ? <AppendStock />
+                        ? <AppendStock
+                            params={this.props.params}
+                            stock={this.props.productInfo.stock}
+                        />
                         : null
                 }
                 {

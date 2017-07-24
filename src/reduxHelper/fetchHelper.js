@@ -2,7 +2,7 @@
 import lodash from 'lodash';
 import queryString from 'query-string';
 
-const hostMain = 'http://localhost:3000';
+const hostMain = 'http://localhost:8080';
 
 const mixinUrl = (inputUrl, inputObject) => {
     if (!inputObject) {
