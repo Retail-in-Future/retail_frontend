@@ -12,51 +12,20 @@
         "import"
     ],
     "rules": {
-        "indent": [
-            "error",
-            4,
-            {
-                "SwitchCase": 1
-            }
+        "indent": [ "error", 4,
+            { "SwitchCase": 1 }
         ],
-        "no-shadow": [
-            "off"
-        ],
-        "no-console": [
-            "off"
-        ],
-        "no-debugger": [
-            "off"
-        ],
-        "arrow-body-style": [
-            "off"
-        ],
-        "comma-dangle": [
-            "warn",
-            "never"
-        ],
-        "import/extensions": [
-            "off"
-        ],
-        "import/no-unresolved": [
-            "off"
-        ],
-        "import/no-extraneous-dependencies": [
-            "off"
-        ],
-        "react/jsx-indent": [
-            "warn",
-            4
-        ],
-        "react/jsx-indent-props": [
-            "warn",
-            4
-        ],
-        "react/jsx-filename-extension": [
-            "off"
-        ],
-        "no-unused-expressions": [
-            "off"
-        ]
+        "no-shadow": [ "off" ],
+        "no-console": [ "off" ],
+        "no-debugger": [ "off" ],
+        "arrow-body-style": [ "off" ],
+        "comma-dangle": [ "warn", "never" ],
+        "import/extensions": [ "off" ],
+        "import/no-unresolved": [ "off" ],
+        "import/no-extraneous-dependencies": [ "off" ],
+        "react/jsx-indent": [ "warn", 4 ],
+        "react/jsx-indent-props": [ "warn", 4 ],
+        "react/jsx-filename-extension": [ "off" ],
+        "no-unused-expressions": [ "off" ]
     }
 }
