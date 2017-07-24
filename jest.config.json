@@ -1,6 +1,6 @@
 {
-    "testMatch": [
-        "**/__tests__/**/*.spec.js"
+    "roots": [
+        "./__tests__"
     ],
     "moduleNameMapper": {
         "\\.(css|scss|less|sass)$": "identity-obj-proxy",
