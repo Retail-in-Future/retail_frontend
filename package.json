@@ -81,7 +81,7 @@
     },
     "jest": {
         "roots": [
-            "./__tests__"
+            "./test"
         ],
         "moduleNameMapper": {
             "\\.(css|scss|less|sass)$": "identity-obj-proxy",
