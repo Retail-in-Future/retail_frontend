@@ -1,6 +1,18 @@
-npm-debug.log
-node_modules/
-dist/
+# Intellij / WebStorm
 .idea
+
+# Package Management
+node_modules/
+
+# Production
+dist/
+
+# Logs
+npm-debug.log
+yarn-error.log
+
+# Mac OS
 .DS_Store
+
+# Temprorary files
 .swp
