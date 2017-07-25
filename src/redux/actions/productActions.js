@@ -27,4 +27,6 @@ appendAction(createApiAction, 'appendStock', {
     method: 'get'
 });
 
+appendAction(createNormalAction, 'updateProductStock');
+
 module.exports = exportActions;

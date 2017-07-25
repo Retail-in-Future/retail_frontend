@@ -30,11 +30,11 @@ export default handleActions({
         tempState.productInfo = action.payload.data;
         return immutable.fromJS(tempState);
     },
-    // updateProductStock: (state, action) => {
-    //     const tempState = state.toJS();
-    //     tempState.productInfo.stock = action.payload.INFO_DATA;
-    //     return immutable.fromJS(tempState);
-    // },
+    updateProductStock: (state, action) => {
+        const tempState = state.toJS();
+        tempState.productInfo.stock = action.payload.INFO_DATA;
+        return immutable.fromJS(tempState);
+    },
     // setProductPrice_SUCCESS: (state, action) => {
     //     const tempState = state.toJS();
     //     tempState.productInfo.price = action.meta.INFO_DATA.price;

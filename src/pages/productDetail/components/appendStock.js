@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { updateProductStock } from 'src/redux/actions/productActions';
 import { Form, Steps, Input, Icon } from 'antd';
 import Modal from 'src/components/modal';
 import styles from './appendStock.css';
@@ -15,12 +17,18 @@ const formItemLayout = {
     }
 };
 
+const mapDispatchToProps = {
+    updateProductStock
+};
+
+@connect(null, mapDispatchToProps)
 @Form.create()
 class AppendStock extends Component {
     static propTypes = {
         form: PropTypes.instanceOf(Object).isRequired,
         params: PropTypes.instanceOf(Object).isRequired,
-        stock: PropTypes.instanceOf(Number).isRequired
+        stock: PropTypes.instanceOf(Number).isRequired,
+        updateProductStock: PropTypes.func.isRequired
     };
 
     constructor() {
@@ -57,6 +65,7 @@ class AppendStock extends Component {
         this.setState({
             currentStep: 1
         });
+        this.props.updateProductStock(this.props.stock + this.state.newAppendedStock);
     }
 
     isValidationFailed = () => {
