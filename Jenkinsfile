@@ -12,10 +12,5 @@ pipeline {
                 sh 'scripts/ci/test.sh'
             }
         }
-        stage('deploy') {
-            steps {
-                sh 'scripts/ci/deploy.sh'
-            }
-        }
     }
 }
