@@ -21,13 +21,13 @@ export default [{
     width: '20%'
 }, {
     title: '库存',
-    dataIndex: 'stock',
-    key: 'stock',
+    dataIndex: 'amount',
+    key: 'amount',
     width: '10%'
 }, {
     title: '已售',
-    dataIndex: 'sold',
-    key: 'sold',
+    dataIndex: 'stockOut',
+    key: 'stockOut',
     width: '10%'
 }, {
     title: '售价',

@@ -3,40 +3,40 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Table } from 'antd';
 
-import { getProductList } from 'src/redux/actions/productActions';
+import { getStockList } from 'src/redux/actions/stockActions';
 import columns from './components/columns';
 import styles from './index.scss';
 
 const mapStateToProps = (state) => {
-    const product = state.product.toJS();
+    const stock = state.stock.toJS();
     return {
-        product
+        stock
     };
 };
 
 const mapDispatchToProps = {
-    getProductList
+    getStockList
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
 class Stock extends Component {
     static propTypes = {
-        getProductList: PropTypes.func.isRequired,
-        product: PropTypes.instanceOf(Object).isRequired
+        getStockList: PropTypes.func.isRequired,
+        stock: PropTypes.instanceOf(Object).isRequired
     };
 
     componentDidMount() {
-        const { getProductList } = this.props;
-        getProductList();
+        const { getStockList } = this.props;
+        getStockList();
     }
 
     render() {
-        const { product } = this.props;
+        const { stock } = this.props;
         return (
             <div className={styles.contentWrap}>
                 <Table
                     columns={columns}
-                    dataSource={product.productList}
+                    dataSource={stock.stockList}
                     rowKey={item => item.sku}
                 />
             </div>

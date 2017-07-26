@@ -2,7 +2,7 @@
 import lodash from 'lodash';
 import queryString from 'query-string';
 
-const hostMain = 'http://localhost:8080';
+const hostMain = 'http://localhost:9001';
 
 const mixinUrl = (inputUrl, inputObject) => {
     if (!inputObject) {
@@ -32,6 +32,7 @@ export default (action) => {
     const actionName = action.type;
     const actionMeta = action.meta;
     const { INFO_DATA, INFO_OPTION } = action.payload;
+
     return mixinFetch(INFO_OPTION, INFO_DATA)
         .then((response) => {
             // 状态码判断
