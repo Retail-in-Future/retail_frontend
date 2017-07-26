@@ -16,6 +16,7 @@ WORKDIR $PROJECT_PATH/retail_frontend
 RUN rm -f yarn.lock
 RUN npm install cross-env jest
 
+RUN yarn install
 RUN yarn build
 
 COPY nginx.conf /etc/nginx/nginx.conf
