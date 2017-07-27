@@ -1,11 +1,9 @@
-FROM fedora:25
+FROM mc2labs/nodejs:dev
 
-RUN dnf -y update && dnf clean all
-RUN dnf -y install nginx && dnf clean all
-
-RUN curl -o /etc/yum.repos.d/yarn.repo https://dl.yarnpkg.com/rpm/yarn.repo
-RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
-RUN dnf install -y yarn findutils
+RUN apt-get update && apt-get install -y nginx
+#RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+#RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+#RUN apt-get update && apt-get install -y yarn
 
 ENV PROJECT_PATH=/root/project
 
@@ -13,17 +11,17 @@ WORKDIR $PROJECT_PATH
 COPY ./ retail_frontend/
 
 WORKDIR $PROJECT_PATH/retail_frontend
-ONBUILD RUN rm -f yarn.lock
-ONBUILD RUN npm install cross-env jest
+RUN rm -f yarn.lock
+RUN npm install cross-env jest
+RUN npm rebuild node-sass --force
 
-ONBUILD RUN yarn install
-ONBUILD RUN yarn build
+RUN yarn install
+RUN yarn build
 
-RUN ls
 
-ONBUILD COPY nginx.conf /etc/nginx/nginx.conf
-ONBUILD ADD dist /usr/share/nginx/html
+RUN cp -f nginx.conf /etc/nginx/nginx.conf
+RUN cp -a dist/* /usr/share/nginx/html/
 
-EXPOSE 90
+EXPOSE 10000
 
-CMD systemctl restart nginx.service 
+CMD service nginx start
