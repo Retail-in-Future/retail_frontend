@@ -35,7 +35,7 @@ echo -e "$top_dir"
 pushd $top_dir
 
 app_name=$(basename $(pwd))
-docker_image_id=`echo "local/${app_name}:latest" | tr "[:upper:]" "[:lower:]"`
+docker_image_id=`echo "local/${app_name}_deploy:latest" | tr "[:upper:]" "[:lower:]"`
 
 docker tag $docker_image_id docker.retail.com/retail/retail_frontend
 docker push docker.retail.com/retail/retail_frontend
