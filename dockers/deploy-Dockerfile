@@ -24,4 +24,4 @@ RUN cp -a dist/* /usr/share/nginx/html/
 
 EXPOSE 10000
 
-CMD service nginx start
+CMD ["nginx", "-g", "daemon off;"]
