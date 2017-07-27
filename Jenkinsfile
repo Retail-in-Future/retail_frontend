@@ -12,6 +12,11 @@ pipeline {
                 sh 'scripts/ci/test.sh'
             }
         }
+        stage('Push docker.') {
+            steps {
+                sh 'scripts/ci/push.sh'
+            }
+        }
         stage('deploy') {
             steps {
                 sh 'scripts/ci/deploy.sh'
