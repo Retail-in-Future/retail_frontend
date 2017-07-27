@@ -93,11 +93,11 @@ class ProductDetail extends Component {
                     </li>
                     <li>
                         <span className={styles.label}>已售数量</span>
-                        <span className={styles.value}>{productInfo.sold}</span>
+                        <span className={styles.value}>{productInfo.stockOut}</span>
                     </li>
                     <li>
                         <span className={styles.label}>库存数量</span>
-                        <span className={styles.value}>{productInfo.stock}</span>
+                        <span className={styles.value}>{productInfo.amount}</span>
                         <Button
                             type="primary"
                             size="small"

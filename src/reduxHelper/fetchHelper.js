@@ -2,7 +2,7 @@
 import lodash from 'lodash';
 import queryString from 'query-string';
 
-const hostMain = 'http://localhost:9001';
+// const hostMain = 'http://localhost:9001';
 
 const mixinUrl = (inputUrl, inputObject) => {
     if (!inputObject) {
@@ -10,21 +10,24 @@ const mixinUrl = (inputUrl, inputObject) => {
     }
     const hasMark = !!location.search;
     const parameters = queryString.stringify(inputObject);
-    return `${inputUrl}${hasMark ? '&' : '?'}${parameters}`;
+    console.log(inputObject.sku);
+    return inputObject.sku ? `${inputUrl}${inputObject.sku}/` : `${inputUrl}${hasMark ? '&' : '?'}${parameters}`;
 };
 
 const mixinFetch = (requestOption, requestData) => {
     const tempOption = lodash.cloneDeep(requestOption);
     const { url } = tempOption;
-    let tempUrl = `${hostMain}${url}`;
+    let tempUrl = `${url}`;
     switch (tempOption.method) {
         case 'get':
             tempUrl = mixinUrl(tempUrl, requestData);
             break;
         default:
             tempOption.body = JSON.stringify(requestData);
+            tempOption.headers = new Headers({ 'Content-Type': 'application/json' });
             break;
     }
+    console.log(tempUrl);
     return fetch(tempUrl, tempOption);
 };
 

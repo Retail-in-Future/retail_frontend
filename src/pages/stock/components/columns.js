@@ -1,12 +1,12 @@
 /* eslint-disable import/prefer-default-export */
 import React from 'react';
 
-const linkRender = (text, item) => <a href={`/#/home/stock/productDetail/${item.sku}`}>{item.productName}</a>;
+const linkRender = (text, item) => <a href={`/#/home/stock/productDetail/${item.SKU}`}>{item.productName}</a>;
 
 export default [{
     title: 'SKU',
-    dataIndex: 'sku',
-    key: 'sku',
+    dataIndex: 'SKU',
+    key: 'SKU',
     width: '25%'
 }, {
     title: '商品名称',

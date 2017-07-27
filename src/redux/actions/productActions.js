@@ -13,7 +13,7 @@ appendAction(createApiAction, 'getProductList', {
 });
 
 appendAction(createApiAction, 'getProductInfo', {
-    url: '/getProductInfo',
+    url: 'http://localhost:9001/stocks/',
     method: 'get'
 });
 

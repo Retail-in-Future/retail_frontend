@@ -23,8 +23,8 @@ export const columnsCreator = (handlers) => {
 
     return [{
         title: 'SKU',
-        dataIndex: 'sku',
-        key: 'sku',
+        dataIndex: 'SKU',
+        key: 'SKU',
         width: '35%'
     }, {
         title: '商品名称',
