@@ -1,7 +1,7 @@
 import webpack from 'webpack';
 import baseConfig from './webpack.base.config.babel';
 
-baseConfig.output.publicPath = './';
+baseConfig.output.publicPath = '/';
 baseConfig.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
         mangle: false,
