@@ -8,27 +8,27 @@ const appendAction = (typeCreator, actionName, options) => {
 };
 
 appendAction(createApiAction, 'getCategories', {
-    url: 'http://localhost:9002/products/',
+    url: 'http://localhost:10001/products/',
     method: 'get'
 });
 
 appendAction(createApiAction, 'getSKU', {
-    url: 'http://localhost:9002/skus/',
+    url: 'http://localhost:10001/skus/',
     method: 'get'
 });
 
 appendAction(createApiAction, 'appendCategory', {
-    url: 'http://localhost:9002/products/',
+    url: 'http://localhost:10001/products/',
     method: 'post'
 });
 
 appendAction(createApiAction, 'updateCategory', {
-    url: 'http://localhost:9002/products/',
+    url: 'http://localhost:10001/products/',
     method: 'put'
 });
 
 appendAction(createApiAction, 'deleteCategory', {
-    url: 'http://localhost:9002/products/',
+    url: 'http://localhost:10001/products/',
     method: 'delete'
 });
 
