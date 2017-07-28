@@ -4,7 +4,7 @@ import actions from 'src/redux/actions/categoryActions';
 import { reducersMap } from 'src/redux/reducers/categoryReducers';
 
 
-describe('Category actions.', () => {
+describe.skip('Category actions.', () => {
     // tests for actions
     test('Action: getCategories.', () => {
         const result = {
