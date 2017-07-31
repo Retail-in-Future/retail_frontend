@@ -51,6 +51,7 @@ class Category extends Component {
         super(props);
         this.state = {
             isEdit: false,
+            formHasError: false,
             categoryInfo: {
                 SKU: '',
                 productName: '',
@@ -88,16 +89,20 @@ class Category extends Component {
 
     @autoBind
     handleConfirmAppend() {
-        const { appendCategory } = this.props;
-        appendCategory(this.state.categoryInfo);
-        return true;
+        if(!this.state.formHasError){
+            const { updateCategory } = this.props;
+            appendCategory(this.state.categoryInfo);
+        }
+        return !this.state.formHasError;
     }
 
     @autoBind
     handleConfirmEdit() {
-        const { updateCategory } = this.props;
-        updateCategory(this.state.categoryInfo);
-        return true;
+        if(!this.state.formHasError){
+            const { updateCategory } = this.props;
+            updateCategory(this.state.categoryInfo);
+        }      
+        return this.state.formHasError;
     }
 
     @autoBind
@@ -114,6 +119,13 @@ class Category extends Component {
     handleDeleteCategory(inputInfo) {
         const { deleteCategory } = this.props;
         deleteCategory(inputInfo);
+    }
+
+    @autoBind
+    onValidate(form) {
+        form.validateFields((error) => {
+            this.state.formHasError = error != null;
+        });
     }
 
     render() {
@@ -135,6 +147,7 @@ class Category extends Component {
                 >
                     <CategoryForm
                         categoryInfo={categoryInfo}
+                        onValidate={this.onValidate}
                         setCategoryInfo={this.setCategoryInfo}
                     />
                 </Modal>

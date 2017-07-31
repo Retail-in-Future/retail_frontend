@@ -39,7 +39,7 @@ class CategoryForm extends React.Component {
     };
 
     render() {
-        const { form } = this.props;
+        const { form, onValidate } = this.props;
         const { getFieldDecorator } = form;
         return (
             <Form>
@@ -62,7 +62,7 @@ class CategoryForm extends React.Component {
                             message: '请输入商品名称'
                         }]
                     })(
-                        <Input />
+                        <Input onBlur={() => onValidate(form)}/>
                     )}
                 </Form.Item>
                 <Form.Item
@@ -76,7 +76,7 @@ class CategoryForm extends React.Component {
                             message: '请输入商品编号'
                         }]
                     })(
-                        <Input />
+                        <Input onBlur={() => onValidate(form)}/>
                     )}
                 </Form.Item>
             </Form>
