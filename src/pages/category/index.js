@@ -82,7 +82,6 @@ class Category extends Component {
             productCode: '',
             SKU: category.responseSKU
         };
-        nextState.isEdit = true;
         this.setState(nextState);
         showModal();
     }
