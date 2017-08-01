@@ -45,11 +45,8 @@ class AppendStock extends Component {
             this.setState({
                 currentStep: 2
             });
-            // const sseUrl = `http://localhost:10002/stocks/${this.props.params.sku}/amount`;
-            // this.receiveServerEvent(sseUrl);
-
-            const newAppendedStock = stock;
-            this.setState({ newAppendedStock });
+            const sseUrl = `http://localhost:10002/sse/stocks/${this.props.params.sku}/amount`;
+            this.receiveServerEvent(sseUrl);
 
             return true;
         }
@@ -69,7 +66,7 @@ class AppendStock extends Component {
         this.setState({
             currentStep: 1
         });
-        const finalStock = this.props.stock + parseInt(this.state.newAppendedStock);
+        const finalStock = this.props.stock + parseInt(this.state.newAppendedStock) + parseInt(this.state.appendedStock);
         this.props.updateProductStock(`${this.props.params.sku}/amount?amount=${finalStock}`);
     }
 
