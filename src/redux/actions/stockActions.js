@@ -8,7 +8,7 @@ const appendAction = (typeCreator, actionName, options) => {
 };
 
 appendAction(createApiAction, 'getStockList', {
-    url: 'http://54.255.220.116:10002/stocks/',
+    url: 'http://localhost:10002/stocks/',
     method: 'get'
 });
 

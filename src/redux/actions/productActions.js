@@ -13,7 +13,7 @@ appendAction(createApiAction, 'getProductList', {
 });
 
 appendAction(createApiAction, 'getProductInfo', {
-    url: 'http://54.255.220.116:10002/stocks/',
+    url: 'http://localhost:10002/stocks/',
     method: 'get'
 });
 
@@ -27,6 +27,16 @@ appendAction(createApiAction, 'appendStock', {
     method: 'get'
 });
 
-appendAction(createNormalAction, 'updateProductStock');
+appendAction(createApiAction, 'updateProductStock', {
+    url: 'http://localhost:10002/stocks/',
+    method: 'put',
+    parseUrl: true
+});
+
+appendAction(createApiAction, 'updateProductPrice', {
+    url: 'http://localhost:10002/stocks/',
+    method: 'put',
+    parseUrl: true
+});
 
 module.exports = exportActions;

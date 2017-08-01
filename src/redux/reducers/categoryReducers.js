@@ -5,7 +5,9 @@ import immutable, { Map } from 'immutable';
 const initState = new Map({
     categories: [],
     isEdit: false,
-    responseSKU: ''
+    responseSKU: '',
+    formHasError: false,
+    formErrorMessages: ''
 });
 export const reducersMap = {
     getCategories_SUCCESS: (state, action) => {

@@ -8,30 +8,37 @@ const appendAction = (typeCreator, actionName, options) => {
 };
 
 appendAction(createApiAction, 'getCategories', {
-    url: 'http://54.255.220.116:10001/products/',
+    url: 'http://localhost:10001/products/',
     method: 'get'
 });
 
 appendAction(createApiAction, 'getSKU', {
-    url: 'http://54.255.220.116:10001/skus/',
+    url: 'http://localhost:10001/skus/',
     method: 'get'
 });
 
 appendAction(createApiAction, 'appendCategory', {
-    url: 'http://54.255.220.116:10001/products/',
+    url: 'http://localhost:10001/products/',
     method: 'post'
 });
 
 appendAction(createApiAction, 'updateCategory', {
-    url: 'http://54.255.220.116:10001/products/',
+    url: 'http://localhost:10001/products/',
+    method: 'put'
+});
+
+appendAction(createApiAction, 'validateCategory', {
+    url: 'http://localhost:10001/products/',
     method: 'put'
 });
 
 appendAction(createApiAction, 'deleteCategory', {
-    url: 'http://54.255.220.116:10001/products/',
+    url: 'http://localhost:10001/products/',
     method: 'delete'
 });
 
+
+appendAction(createNormalAction, 'setCategoryFormValidate');
 module.exports = exportActions;
 
 // export const getSKU = createApiAction('getSKU', {

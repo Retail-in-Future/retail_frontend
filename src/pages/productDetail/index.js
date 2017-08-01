@@ -13,6 +13,7 @@ import {
 import Modal from 'src/components/modal';
 import { showModal } from 'src/redux/actions/modalActions';
 import AppendStock from './components/appendStock';
+import AppendPrice from './components/appendPrice';
 import styles from './index.scss';
 
 const mapStateToProps = (state) => {
@@ -109,15 +110,16 @@ class ProductDetail extends Component {
                     modalContentName === 'appendStock'
                         ? <AppendStock
                             params={this.props.params}
-                            stock={this.props.productInfo.stock}
+                            stock={this.props.productInfo.amount}
                         />
                         : null
                 }
                 {
                     modalContentName === 'setPrice'
-                        ? <Modal >
-                            <p>this is an input to set price.</p>
-                        </Modal>
+                        ? <AppendPrice
+                            params={this.props.params}
+                            price={this.props.productInfo.price}
+                        />
                         : null
                 }
             </div>

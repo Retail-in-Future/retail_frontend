@@ -27,7 +27,7 @@ class AppendStock extends Component {
     static propTypes = {
         form: PropTypes.instanceOf(Object).isRequired,
         params: PropTypes.instanceOf(Object).isRequired,
-        stock: PropTypes.instanceOf(Number).isRequired,
+        stock: PropTypes.number,
         updateProductStock: PropTypes.func.isRequired
     };
 
@@ -45,8 +45,12 @@ class AppendStock extends Component {
             this.setState({
                 currentStep: 2
             });
-            const sseUrl = `http://localhost:8080/sse/products/${this.props.params.sku}/stock`;
-            this.receiveServerEvent(sseUrl);
+            // const sseUrl = `http://localhost:10002/stocks/${this.props.params.sku}/amount`;
+            // this.receiveServerEvent(sseUrl);
+
+            const newAppendedStock = stock;
+            this.setState({ newAppendedStock });
+
             return true;
         }
 
@@ -65,7 +69,8 @@ class AppendStock extends Component {
         this.setState({
             currentStep: 1
         });
-        this.props.updateProductStock(this.props.stock + this.state.newAppendedStock);
+        const finalStock = this.props.stock + parseInt(this.state.newAppendedStock);
+        this.props.updateProductStock(`${this.props.params.sku}/amount?amount=${finalStock}`);
     }
 
     isValidationFailed = () => {
