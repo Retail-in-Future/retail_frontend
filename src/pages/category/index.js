@@ -4,14 +4,15 @@ import lodash from 'lodash';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Table } from 'antd';
+import { Button, Table, Message } from 'antd';
 
 import {
     getSKU,
     getCategories,
     appendCategory,
     updateCategory,
-    deleteCategory
+    deleteCategory,
+    setCategoryFormValidate
 } from 'src/redux/actions/categoryActions';
 import { showModal } from 'src/redux/actions/modalActions';
 import Modal from 'src/components/modal/';
@@ -32,7 +33,8 @@ const mapDispatchToProps = {
     getCategories,
     appendCategory,
     updateCategory,
-    deleteCategory
+    deleteCategory,
+    setCategoryFormValidate
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -44,7 +46,8 @@ class Category extends Component {
         showModal: PropTypes.func.isRequired,
         appendCategory: PropTypes.func.isRequired,
         updateCategory: PropTypes.func.isRequired,
-        deleteCategory: PropTypes.func.isRequired
+        deleteCategory: PropTypes.func.isRequired,
+        setCategoryFormValidate: PropTypes.func.isRequired
     };
 
     constructor(props) {
@@ -76,20 +79,21 @@ class Category extends Component {
     @autoBind
     handleAppendCategory() {
         const nextState = lodash.cloneDeep(this.state);
-        const { showModal, category } = this.props;
+        const { showModal, category, setCategoryFormValidate} = this.props;
         nextState.categoryInfo = {
             productName: '',
             productCode: '',
             SKU: category.responseSKU
         };
         this.setState(nextState);
+        setCategoryFormValidate();
         showModal();
     }
 
     @autoBind
     handleConfirmAppend() {
         if(!this.state.formHasError){
-            const { updateCategory } = this.props;
+            const { appendCategory } = this.props;
             appendCategory(this.state.categoryInfo);
         }
         return !this.state.formHasError;
@@ -97,20 +101,24 @@ class Category extends Component {
 
     @autoBind
     handleConfirmEdit() {
+
         if(!this.state.formHasError){
             const { updateCategory } = this.props;
             updateCategory(this.state.categoryInfo);
-        }      
-        return this.state.formHasError;
+        }
+
+        return !this.state.formHasError;
     }
 
     @autoBind
     handleEditCategory(inputInfo) {
         const nextState = lodash.cloneDeep(this.state);
-        const { showModal } = this.props;
+        const { showModal, setCategoryFormValidate } = this.props;
+        this.props.category.formHasError = false;
         nextState.isEdit = true;
         nextState.categoryInfo = inputInfo;
         this.setState(nextState);
+        setCategoryFormValidate();
         showModal();
     }
 
@@ -126,6 +134,18 @@ class Category extends Component {
             this.state.formHasError = error != null;
         });
     }
+
+    @autoBind
+    showMsg() {
+        const { isEdit } = this.state;
+        const { category } = this.props;
+        const preMsg = isEdit ? '品类编辑' : '品类添加';
+        if(category.formHasError){
+            Message.error(`${preMsg}失败, 商品名称已经被占用！`)
+        }else{
+            // Message.info(`${preMsg}成功`);
+        }
+    };
 
     render() {
         const { isEdit, categoryInfo } = this.state;
@@ -143,6 +163,7 @@ class Category extends Component {
                 <Modal
                     title={isEdit ? '编辑品类' : '添加品类'}
                     confirmFunction={isEdit ? this.handleConfirmEdit : this.handleConfirmAppend}
+                    afterCloseFunction={this.showMsg}
                 >
                     <CategoryForm
                         categoryInfo={categoryInfo}

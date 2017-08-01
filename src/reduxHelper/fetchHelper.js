@@ -10,7 +10,6 @@ const mixinUrl = (inputUrl, inputObject) => {
     }
     const hasMark = !!location.search;
     const parameters = queryString.stringify(inputObject);
-    console.log(inputObject.sku);
     return inputObject.sku ? `${inputUrl}${inputObject.sku}/` : `${inputUrl}${hasMark ? '&' : '?'}${parameters}`;
 };
 
@@ -23,11 +22,13 @@ const mixinFetch = (requestOption, requestData) => {
             tempUrl = mixinUrl(tempUrl, requestData);
             break;
         default:
+            if(tempOption.parseUrl){
+                tempUrl = tempUrl + requestData;
+            }
             tempOption.body = JSON.stringify(requestData);
             tempOption.headers = new Headers({ 'Content-Type': 'application/json' });
             break;
     }
-    console.log(tempUrl);
     return fetch(tempUrl, tempOption);
 };
 

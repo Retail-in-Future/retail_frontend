@@ -21,11 +21,12 @@ const mapDispatchToProps = {
 class ModalComponent extends Component {
     static propTypes = {
         modal: PropTypes.instanceOf(Object),
+        category: PropTypes.instanceOf(Object),
         title: PropTypes.string,
         children: PropTypes.node,
         hideModal: PropTypes.func,
         confirmFunction: PropTypes.func,
-        afterCloseFunction: PropTypes.func
+        afterCloseFunction: PropTypes.func,
     };
 
     static defaultProps = {
@@ -39,7 +40,7 @@ class ModalComponent extends Component {
 
     @autoBind
     handleHideModal() {
-        const { hideModal } = this.props;
+        const { hideModal, children } = this.props;
         hideModal();
     }
 
@@ -47,7 +48,7 @@ class ModalComponent extends Component {
     handleConfirmCreator() {
         const { confirmFunction } = this.props;
         return () => {
-            confirmFunction && !confirmFunction() && this.handleHideModal();
+            confirmFunction && confirmFunction() && this.handleHideModal();
         };
     }
 
