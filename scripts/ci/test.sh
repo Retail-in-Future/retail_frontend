@@ -34,6 +34,6 @@ set -o errexit -o nounset \
 && yarn test -- --coverage --verbose \
 EOF
 
-popd
+# popd
 
 # End of script
