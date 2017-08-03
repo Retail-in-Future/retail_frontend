@@ -79,7 +79,7 @@ class Category extends Component {
     @autoBind
     handleAppendCategory() {
         const nextState = lodash.cloneDeep(this.state);
-        const { showModal, category, setCategoryFormValidate} = this.props;
+        const { showModal, category, setCategoryFormValidate } = this.props;
         nextState.categoryInfo = {
             productName: '',
             productCode: '',
@@ -92,7 +92,7 @@ class Category extends Component {
 
     @autoBind
     handleConfirmAppend() {
-        if(!this.state.formHasError){
+        if (!this.state.formHasError) {
             const { appendCategory } = this.props;
             appendCategory(this.state.categoryInfo);
         }
@@ -101,8 +101,7 @@ class Category extends Component {
 
     @autoBind
     handleConfirmEdit() {
-
-        if(!this.state.formHasError){
+        if (!this.state.formHasError) {
             const { updateCategory } = this.props;
             updateCategory(this.state.categoryInfo);
         }
@@ -140,12 +139,12 @@ class Category extends Component {
         const { isEdit } = this.state;
         const { category } = this.props;
         const preMsg = isEdit ? '品类编辑' : '品类添加';
-        if(category.formHasError){
-            Message.error(`${preMsg}失败, 商品名称已经被占用！`)
-        }else{
+        if (category.formHasError) {
+            Message.error(`${preMsg}失败, 商品名称已经被占用！`);
+        } else {
             // Message.info(`${preMsg}成功`);
         }
-    };
+    }
 
     render() {
         const { isEdit, categoryInfo } = this.state;
