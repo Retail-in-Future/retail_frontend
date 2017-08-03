@@ -14,7 +14,7 @@ export const reducersMap = {
         return state.set('categories', action.payload.data);
     },
     getSKU_SUCCESS: (state, action) => {
-        return state.set('responseSKU', action.payload.data.SKU);
+        return state.set('responseSKU', action.payload.data);
     },
     updateCategory_SUCCESS: (state, action) => {
         return state.set('formHasError', false);
