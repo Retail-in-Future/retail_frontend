@@ -9,6 +9,7 @@ import _ from 'lodash';
 import styles from './index.scss';
 import Header from './Header';
 import UserGuide from './UserGuide';
+import Summary from './Summary';
 
 const columns = [
     {
@@ -34,6 +35,8 @@ const Checkout = ({ products = [{ name: 'product', quantity: 1, price: 200.00 }]
           _.isEmpty(products) ? <UserGuide /> :
           <Table dataSource={products} columns={columns} pagination={false} />
         }
+
+        <Summary totalQuantity={4} totalPrice={900.00} />
     </Layout>
 );
 

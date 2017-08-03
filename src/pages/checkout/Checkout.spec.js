@@ -6,6 +6,7 @@ import { Table } from 'antd';
 import Checkout from '.';
 import Header from './Header';
 import UserGuide from './UserGuide';
+import Summary from './Summary';
 
 describe('Checkout component', () => {
     describe('Checkout header', () => {
@@ -68,6 +69,21 @@ describe('Checkout component', () => {
             const component = shallow(<Checkout products={products} />);
 
             expect(component.find(Table).props().dataSource).toEqual(products);
+        });
+
+        it('should render total quantity and total price when there are multiple products to check out', () => {
+            const products = [
+                { name: '茅台王子酒53度（酱香型）', unitPrice: 200.00, quantity: 2 },
+                { name: '茅台迎宾酒53度（酱香型）', unitPrice: 200.00, quantity: 1 },
+                { name: '飞天迎宾酒53度（酱香型）', unitPrice: 300.00, quantity: 1 }
+            ];
+
+            const component = shallow(<Checkout products={products} />);
+            const summary = component.find(Summary);
+
+            expect(summary).toHaveLength(1);
+            expect(summary.props().totalQuantity).toBe(4);
+            expect(summary.props().totalPrice).toBe(900.00);
         });
     });
 });
