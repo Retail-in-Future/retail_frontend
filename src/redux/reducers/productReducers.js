@@ -17,7 +17,7 @@ const initState = immutable.fromJS({
     productList: [],
     productInfo: {},
     appendedStock: 0,
-    newAppendedStock: 0
+    newAppendedStock: 0,
 });
 export default handleActions({
     getProductList_SUCCESS: (state, action) => {
@@ -40,7 +40,7 @@ export default handleActions({
         const tempState = state.toJS();
         tempState.productInfo.price = action.payload.data;
         return immutable.fromJS(tempState);
-    }
+    },
     // setProductPrice_SUCCESS: (state, action) => {
     //     const tempState = state.toJS();
     //     tempState.productInfo.price = action.meta.INFO_DATA.price;

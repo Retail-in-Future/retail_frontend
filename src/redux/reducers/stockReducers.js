@@ -4,7 +4,7 @@ import { handleActions } from 'redux-actions';
 import immutable from 'immutable';
 
 const initState = immutable.fromJS({
-    stockList: []
+    stockList: [],
 });
 export default handleActions({
     getStockList_SUCCESS: (state, action) => {

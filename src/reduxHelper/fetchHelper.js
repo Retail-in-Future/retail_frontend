@@ -22,8 +22,8 @@ const mixinFetch = (requestOption, requestData) => {
             tempUrl = mixinUrl(tempUrl, requestData);
             break;
         default:
-            if (tempOption.parseUrl) {
-                tempUrl += requestData;
+            if(tempOption.parseUrl){
+                tempUrl = tempUrl + requestData;
             }
             tempOption.body = JSON.stringify(requestData);
             tempOption.headers = new Headers({ 'Content-Type': 'application/json' });

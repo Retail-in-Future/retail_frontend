@@ -26,7 +26,7 @@ class ModalComponent extends Component {
         children: PropTypes.node,
         hideModal: PropTypes.func,
         confirmFunction: PropTypes.func,
-        afterCloseFunction: PropTypes.func
+        afterCloseFunction: PropTypes.func,
     };
 
     static defaultProps = {

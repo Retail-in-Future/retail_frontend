@@ -62,7 +62,7 @@ class CategoryForm extends React.Component {
                             message: '请输入商品名称'
                         }]
                     })(
-                        <Input onBlur={() => onValidate(form)} />
+                        <Input onBlur={() => onValidate(form)}/>
                     )}
                 </Form.Item>
                 <Form.Item
@@ -76,7 +76,7 @@ class CategoryForm extends React.Component {
                             message: '请输入商品编号'
                         }]
                     })(
-                        <Input onBlur={() => onValidate(form)} />
+                        <Input onBlur={() => onValidate(form)}/>
                     )}
                 </Form.Item>
             </Form>
