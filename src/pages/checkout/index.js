@@ -1,6 +1,4 @@
-/* eslint-disable react/forbid-prop-types, react/require-default-props */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import { Layout } from 'antd';
 
@@ -11,17 +9,20 @@ import ProductSummary from './ProductSummary';
 
 const { Header, Content } = Layout;
 
-class Checkout extends Component {
+export default class Checkout extends Component {
+    constructor() {
+        super();
+        this.state = {
+            products: []
+        };
+    }
+
     componentDidMount() {
 
     }
 
     render() {
-        const products = this.props.products || [
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 }
-        ];
+        const { products } = this.state;
 
         return (
             <Layout>
@@ -39,8 +40,3 @@ class Checkout extends Component {
     }
 }
 
-Checkout.propTypes = {
-    products: PropTypes.array
-};
-
-export default Checkout;

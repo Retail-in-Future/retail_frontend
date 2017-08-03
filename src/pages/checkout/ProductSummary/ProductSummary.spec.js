@@ -22,7 +22,7 @@ describe('ProductSummary component', () => {
         const table = component.find(Table);
 
         expect(table).toHaveLength(1);
-        expect(table.props().columns).toEqual(expectedColumnNames);
+        expect(table.props().columns).toMatchObject(expectedColumnNames);
     });
 
     it('should render product table with details when there are multiple products to check out', () => {

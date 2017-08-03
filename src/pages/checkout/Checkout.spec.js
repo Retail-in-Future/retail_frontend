@@ -10,9 +10,14 @@ import ProductSummary from './ProductSummary';
 const { Header } = Layout;
 
 describe('Checkout component', () => {
+    let component;
+
+    beforeEach(() => {
+        component = shallow(<Checkout />);
+    });
     describe('Checkout header', () => {
         it('should render a Header component with title 结账指引 when no products are to be checked out', () => {
-            const component = shallow(<Checkout products={[]} />);
+            component.setState({ products: [] });
 
             expect(component.find(Header)).toHaveLength(1);
             expect(component.find(Header).html()).toContain('结账指引');
@@ -22,7 +27,7 @@ describe('Checkout component', () => {
             const products = [
                 { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 }
             ];
-            const component = shallow(<Checkout products={products} />);
+            component.setState({ products });
 
             expect(component.find(Header)).toHaveLength(1);
             expect(component.find(Header).html()).toContain('商品清单');
@@ -31,7 +36,7 @@ describe('Checkout component', () => {
 
     describe('Table component', () => {
         it('should render a user guide when no products to be checked out', () => {
-            const component = shallow(<Checkout products={[]} />);
+            component.setState({ products: [] });
 
             expect(component.find(UserGuide)).toHaveLength(1);
         });
@@ -40,7 +45,7 @@ describe('Checkout component', () => {
             const products = [
                 { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 }
             ];
-            const component = shallow(<Checkout products={products} />);
+            component.setState({ products });
 
             expect(component.find(ProductSummary)).toHaveLength(1);
         });
