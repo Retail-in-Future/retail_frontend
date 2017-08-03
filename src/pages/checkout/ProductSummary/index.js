@@ -5,21 +5,24 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 import { Table } from 'antd';
-import Summary from '../Summary'
+import Summary from '../Summary';
 
 const columns = [
     {
         title: '商品',
         dataIndex: 'name',
-        key: 'name'
+        key: 'name',
+        width: 400
     }, {
         title: '单价',
         dataIndex: 'price',
-        key: 'price'
+        key: 'price',
+        width: 100
     }, {
         title: '数量',
         dataIndex: 'quantity',
-        key: 'quantity'
+        key: 'quantity',
+        width: 100
     }
 ];
 
