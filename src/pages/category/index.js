@@ -58,7 +58,8 @@ class Category extends Component {
             categoryInfo: {
                 SKU: '',
                 productName: '',
-                productCode: ''
+                productCode: '',
+                upc: ''
             }
         };
     }
@@ -90,7 +91,8 @@ class Category extends Component {
         nextState.categoryInfo = {
             productName: '',
             productCode: '',
-            SKU: category.responseSKU
+            SKU: category.responseSKU,
+            upc: ''
         };
         this.setState(nextState);
         setCategoryFormValidate();

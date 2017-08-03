@@ -37,7 +37,7 @@ class Stock extends Component {
                 <Table
                     columns={columns}
                     dataSource={stock.stockList}
-                    rowKey={item => item.sku}
+                    rowKey={item => item.upc}
                 />
             </div>
         );

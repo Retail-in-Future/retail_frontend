@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import React from 'react';
 
-const linkRender = (text, item) => <a href={`/#/home/stock/productDetail/${item.SKU}`}>{item.productName}</a>;
+const linkRender = (text, item) => <a href={`/#/home/stock/productDetail/${item.upc}`}>{item.productName}</a>;
 
 export default [{
     title: 'SKU',
