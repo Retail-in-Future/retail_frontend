@@ -26,7 +26,7 @@ pushd $top_dir
 app_name=$(basename $(pwd))
 docker_image_id=`echo "local/${app_name}:latest" | tr "[:upper:]" "[:lower:]"`
 
-docker run -ti -e DOCKER_HOST_USERID="$(id -u):$(id -g)" --rm $docker_image_id /bin/bash << "EOF"
+docker run -i -e DOCKER_HOST_USERID="$(id -u):$(id -g)" --rm $docker_image_id /bin/bash << "EOF"
 set -o errexit -o nounset \
 \
 && yarn install \
