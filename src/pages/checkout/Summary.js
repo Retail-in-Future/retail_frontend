@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 export default function Summary({ totalQuantity, totalPrice }) {
     return (
         <div>
-            <p>total quantity: { totalQuantity }</p>
-            <p>total price: { totalPrice }</p>
+            <p>数量 { totalQuantity }</p>
+            <p>金额 { totalPrice }</p>
         </div>
     );
 }
