@@ -27,18 +27,21 @@ const columns = [
     }
 ];
 
-const Checkout = ({ products = [{ name: 'product', quantity: 1, price: 200.00 }] }) => (
-    <Layout className={styles.wrap}>
-        <Header title={_.isEmpty(products) ? '结账指引' : '商品清单'} />
+const Checkout = ({ products = [{ name: 'product', quantity: 1, price: 200.00 }] }) => {
+    const totalQuantity = _.chain(products).sumBy(product => product.quantity).value();
+    return (
+        <Layout className={styles.wrap}>
+            <Header title={_.isEmpty(products) ? '结账指引' : '商品清单'} />
 
-        {
-          _.isEmpty(products) ? <UserGuide /> :
-          <Table dataSource={products} columns={columns} pagination={false} />
-        }
+            {
+        _.isEmpty(products) ? <UserGuide /> :
+        <Table dataSource={products} columns={columns} pagination={false} />
+      }
 
-        <Summary totalQuantity={4} totalPrice={900.00} />
-    </Layout>
-);
+            <Summary totalQuantity={totalQuantity} totalPrice={900.00} />
+        </Layout>
+    );
+};
 
 Checkout.propTypes = {
     products: PropTypes.array
