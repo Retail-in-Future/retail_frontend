@@ -32,7 +32,7 @@ const Checkout = ({ products = [{ name: 'product', quantity: 1, price: 200.00 }]
 
         {
           _.isEmpty(products) ? <UserGuide /> :
-          <Table dataSource={products} columns={columns} />
+          <Table dataSource={products} columns={columns} pagination={false} />
         }
     </Layout>
 );
