@@ -27,7 +27,7 @@ class AppendStock extends Component {
     static propTypes = {
         form: PropTypes.instanceOf(Object).isRequired,
         params: PropTypes.instanceOf(Object).isRequired,
-        stock: PropTypes.number,
+        stock: PropTypes.number.isRequired,
         updateProductStock: PropTypes.func.isRequired
     };
 
@@ -66,7 +66,8 @@ class AppendStock extends Component {
         this.setState({
             currentStep: 1
         });
-        const finalStock = this.props.stock + parseInt(this.state.newAppendedStock) + parseInt(this.state.appendedStock);
+        const finalStock = parseInt(this.state.newAppendedStock, 10)
+        + parseInt(this.state.appendedStock, 10);
         this.props.updateProductStock(`${this.props.params.sku}/amount?amount=${finalStock}`);
     }
 

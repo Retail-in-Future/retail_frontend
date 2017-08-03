@@ -10,7 +10,6 @@ import {
     setProductPrice,
     appendStock
 } from 'src/redux/actions/productActions';
-import Modal from 'src/components/modal';
 import { showModal } from 'src/redux/actions/modalActions';
 import AppendStock from './components/appendStock';
 import AppendPrice from './components/appendPrice';
@@ -90,6 +89,7 @@ class ProductDetail extends Component {
                             type="primary"
                             size="small"
                             onClick={this.showModalCreator('setPrice')}
+                            disabled={productInfo.amount === 0}
                         >修改售价</Button>
                     </li>
                     <li>
