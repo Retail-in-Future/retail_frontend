@@ -7,9 +7,10 @@ import { Layout, Table } from 'antd';
 import _ from 'lodash';
 
 import styles from './index.scss';
-import Header from './Header';
 import UserGuide from './UserGuide';
 import Summary from './Summary';
+
+const { Header } = Layout;
 
 const columns = [
     {
@@ -33,8 +34,9 @@ const Checkout = ({ products = [{ name: 'product', quantity: 1, price: 200.00 }]
 
     return (
         <Layout className={styles.wrap}>
-            <Header title={_.isEmpty(products) ? '结账指引' : '商品清单'} />
-
+            <Header>
+                {_.isEmpty(products) ? '结账指引' : '商品清单'}
+            </Header>
             {
                 _.isEmpty(products) ? <UserGuide /> :
                 <Table dataSource={products} columns={columns} pagination={false} />

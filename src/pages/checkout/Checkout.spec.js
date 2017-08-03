@@ -1,12 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Table } from 'antd';
+import { Table, Layout } from 'antd';
 
 import Checkout from '.';
-import Header from './Header';
 import UserGuide from './UserGuide';
 import Summary from './Summary';
+
+const { Header } = Layout;
 
 describe('Checkout component', () => {
     describe('Checkout header', () => {
@@ -14,7 +15,7 @@ describe('Checkout component', () => {
             const component = shallow(<Checkout products={[]} />);
 
             expect(component.find(Header)).toHaveLength(1);
-            expect(component.find(Header).props().title).toBe('结账指引');
+            expect(component.find(Header).html()).toContain('结账指引');
         });
 
         it('should render a Header component with title 商品清单 when there are products to be checked out', () => {
@@ -24,7 +25,7 @@ describe('Checkout component', () => {
             const component = shallow(<Checkout products={products} />);
 
             expect(component.find(Header)).toHaveLength(1);
-            expect(component.find(Header).props().title).toBe('商品清单');
+            expect(component.find(Header).html()).toContain('商品清单');
         });
     });
 
