@@ -9,7 +9,7 @@ import _ from 'lodash';
 import styles from './index.scss';
 import Header from './Header';
 
-const Checkout = ({ products = ['string'] }) => (
+const Checkout = ({ products = [] }) => (
     <Layout className={styles.wrap}>
         <Header title={_.isEmpty(products) ? '结账指引' : '商品清单'} />
     </Layout>
