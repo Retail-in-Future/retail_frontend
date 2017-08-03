@@ -58,6 +58,17 @@ describe('Checkout component', () => {
             expect(table).toHaveLength(1);
             expect(table.props().columns).toEqual(expectedColumnNames);
         });
+
+        it('should render product table with details when there are multiple products to check out', () => {
+            const products = [
+              { name: '茅台王子酒53度（酱香型）', unitPrice: 200.00, quantity: 2 },
+              { name: '茅台迎宾酒53度（酱香型）', unitPrice: 200.00, quantity: 2 }
+            ];
+
+            const component = shallow(<Checkout products={products} />);
+
+            expect(component.find(Table).props().dataSource).toEqual(products);
+        });
     });
 });
 
