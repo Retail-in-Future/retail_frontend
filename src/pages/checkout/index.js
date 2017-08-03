@@ -36,9 +36,9 @@ const Checkout = ({ products = [{ name: 'product', quantity: 1, price: 200.00 }]
             <Header title={_.isEmpty(products) ? '结账指引' : '商品清单'} />
 
             {
-        _.isEmpty(products) ? <UserGuide /> :
-        <Table dataSource={products} columns={columns} pagination={false} />
-      }
+                _.isEmpty(products) ? <UserGuide /> :
+                <Table dataSource={products} columns={columns} pagination={false} />
+            }
 
             <Summary totalQuantity={totalQuantity} totalPrice={totalPrice} />
         </Layout>
