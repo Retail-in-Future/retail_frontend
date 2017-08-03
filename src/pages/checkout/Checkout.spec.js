@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 
 import Checkout from '.';
 import Header from './Header';
+import UserGuide from './UserGuide';
 
 describe('Checkout component', () => {
     describe('Checkout header', () => {
@@ -21,6 +22,14 @@ describe('Checkout component', () => {
 
             expect(component.find(Header)).toHaveLength(1);
             expect(component.find(Header).props().title).toBe('商品清单');
+        });
+    });
+
+    describe('Table component', () => {
+        it('should render a user guide when no products to be checked out', () => {
+            const component = shallow(<Checkout products={[]} />);
+
+            expect(component.find(UserGuide)).toHaveLength(1);
         });
     });
 });
