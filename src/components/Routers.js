@@ -6,6 +6,7 @@ import Home from '../pages/home/';
 import Category from '../pages/category/';
 import Stock from '../pages/stock/';
 import ProductDetail from '../pages/productDetail/';
+import Checkout from '../pages/checkout/';
 
 const Routers = () => (
     <Router history={hashHistory}>
@@ -15,6 +16,7 @@ const Routers = () => (
                 <Route path="stock" component={Stock} />
                 <Route path="stock/productDetail/:sku" component={ProductDetail} />
             </Route>
+            <Route path="checkout" component={Checkout} />
         </Route>
     </Router>
 );
