@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import { Table } from 'antd';
+
 import Checkout from '.';
 import Header from './Header';
 import UserGuide from './UserGuide';
@@ -30,6 +32,31 @@ describe('Checkout component', () => {
             const component = shallow(<Checkout products={[]} />);
 
             expect(component.find(UserGuide)).toHaveLength(1);
+        });
+
+        it('should render product summary table with correct column names when there is one product to check out', () => {
+            const products = [
+                { name: '茅台王子酒53度（酱香型）', unitPrice: 200.00, quantity: 2 }
+            ];
+            const expectedColumnNames = [{
+                title: '商品',
+                dataIndex: 'name',
+                key: 'name'
+            }, {
+                title: '单价',
+                dataIndex: 'price',
+                key: 'price'
+            }, {
+                title: '数量',
+                dataIndex: 'quantity',
+                key: 'quantity'
+            }];
+
+            const component = shallow(<Checkout products={products} />);
+            const table = component.find(Table);
+
+            expect(table).toHaveLength(1);
+            expect(table.props().columns).toEqual(expectedColumnNames);
         });
     });
 });
