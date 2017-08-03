@@ -29,6 +29,7 @@ docker_image_id=`echo "local/${app_name}:latest" | tr "[:upper:]" "[:lower:]"`
 docker run -i -e DOCKER_HOST_USERID="$(id -u):$(id -g)" --rm $docker_image_id /bin/bash << "EOF"
 set -o errexit -o nounset \
 \
+&& npm rebuild node-sass --force \
 && yarn install \
 && yarn lint \
 && yarn test -- --coverage --verbose \
