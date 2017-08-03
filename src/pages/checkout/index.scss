@@ -1,16 +1,4 @@
-.wrap {
-  height: 100vh;
-  .sider {
-    overflow: auto;
-  }
-  .header {
-    background-color: #FFFFFF;
-  }
-  .content {
-    margin: 24px 16px 0;
-    overflow: initial;
-  }
-  .footer {
-    text-align: center;
-  }
+.header {
+  position: fixed;
+  width: 100%;
 }
