@@ -9,7 +9,7 @@ import ProductSummary from './ProductSummary';
 
 const { Header } = Layout;
 
-describe('Checkout component', () => {
+describe.skip('Checkout component', () => {
     let component;
 
     beforeEach(() => {
