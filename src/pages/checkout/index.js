@@ -43,7 +43,7 @@ export default class Checkout extends Component {
                 <Header style={{ position: 'fixed', width: '100%', color: 'white' }}>
                     { _.isEmpty(products) ? '结账指引' : '商品清单' }
                 </Header>
-                <Content style={{ marginTop: 64, paddingLeft: 30, paddingTop: 30 }}>
+                <Content style={{ marginTop: 64, paddingLeft: 36, paddingTop: 30 }}>
                     { _.isEmpty(products) ?
                         <UserGuide /> :
                         <ProductSummary products={products} />
