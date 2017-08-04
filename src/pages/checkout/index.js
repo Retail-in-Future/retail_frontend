@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { Layout } from 'antd';
 
-import SockJS from 'sockjs-client';
 import _ from 'lodash';
 
 import UserGuide from './UserGuide';
@@ -19,8 +18,6 @@ export default class Checkout extends Component {
     }
 
     componentDidMount() {
-        console.log('-------- SockJS --------');
-        console.log(SockJS);
     }
 
     render() {
