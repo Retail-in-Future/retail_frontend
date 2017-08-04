@@ -34,8 +34,8 @@ describe('ProductSummary component', () => {
                 { name: '茅台迎宾酒53度（酱香型）', price: 200.00, upc: 'visitors-wine' }
             ];
             const expected = [
-                { name: '茅台王子酒53度（酱香型）', price: 200.00, upc: 'prince-wine', quantity: 1 },
-                { name: '茅台迎宾酒53度（酱香型）', price: 200.00, upc: 'visitors-wine', quantity: 1 }
+                { name: '茅台王子酒53度（酱香型）', price: 200.00, upc: 'prince-wine', quantity: 1, key: 'prince-wine' },
+                { name: '茅台迎宾酒53度（酱香型）', price: 200.00, upc: 'visitors-wine', quantity: 1, key: 'visitors-wine' }
             ];
 
             const component = shallow(<ProductSummary products={products} totalPrice={800.00} />);
@@ -51,8 +51,8 @@ describe('ProductSummary component', () => {
               { name: '茅台迎宾酒53度（酱香型）', price: 300.00, upc: 'visitors-wine' }
             ];
             const expected = [
-              { name: '茅台王子酒53度（酱香型）', price: 200.00, upc: 'prince-wine', quantity: 3 },
-              { name: '茅台迎宾酒53度（酱香型）', price: 300.00, upc: 'visitors-wine', quantity: 1 }
+              { name: '茅台王子酒53度（酱香型）', price: 200.00, upc: 'prince-wine', quantity: 3, key: 'prince-wine' },
+              { name: '茅台迎宾酒53度（酱香型）', price: 300.00, upc: 'visitors-wine', quantity: 1, key: 'visitors-wine' }
             ];
 
             const component = shallow(<ProductSummary products={products} totalPrice={900.00} />);
