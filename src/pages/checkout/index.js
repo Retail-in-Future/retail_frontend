@@ -36,14 +36,39 @@ export default class Checkout extends Component {
     }
 
     render() {
-        const { products } = this.state;
+        const products = [
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
+          { name: '茅台迎宾酒53度（酱香型）', price: 200.00, quantity: 1 },
+          { name: '飞天迎宾酒53度（酱香型）', price: 300.00, quantity: 1 }
+        ];
 
         return (
             <Layout>
                 <Header style={{ position: 'fixed', width: '100%', color: 'white' }}>
                     { _.isEmpty(products) ? '结账指引' : '商品清单' }
                 </Header>
-                <Content style={{ marginTop: 64, paddingLeft: 36, paddingTop: 30 }}>
+                <Content style={{ marginTop: 64, padding: '30px 36px 0 36px' }}>
                     { _.isEmpty(products) ?
                         <UserGuide /> :
                         <ProductSummary products={products} />

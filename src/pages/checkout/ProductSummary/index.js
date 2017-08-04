@@ -36,7 +36,7 @@ const ProductSummary = ({ products }) => {
                 dataSource={products}
                 columns={columns}
                 pagination={false}
-                scroll={{ y: 1000 }}
+                scroll={{ y: 800 }}
             />
             <Summary totalQuantity={totalQuantity} totalPrice={totalPrice} />
         </div>
