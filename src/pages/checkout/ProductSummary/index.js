@@ -27,6 +27,7 @@ const columns = [
 ];
 
 const ProductSummary = ({ products, totalPrice }) => {
+    // TODO: [Linesh][8/4/17] refactor, better architect data operations
     const productsWithQuantities = _.chain(products)
       .groupBy('upc')
       .map(group => ({
