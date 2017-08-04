@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { Layout } from 'antd';
 
+import axios from 'axios';
 import _ from 'lodash';
 
 import UserGuide from './UserGuide';
@@ -20,12 +21,12 @@ export default class Checkout extends Component {
 
     componentDidMount() {
         this.executeEvery(() => {
-            // fetch('http://10.207.22.156:8080/checklist', { mode: 'no-cors' }).then((data) => {
-            //     console.log('-------- data --------');
-            //     console.log(data.response);
-            //     console.log(data.data);
-            //     console.log(data.body);
-            // });
+            axios.get('http://10.207.22.156:8080/checklist').then((response) => {
+                this.setState({
+                    products: response.data.itemList,
+                    totalPrice: response.data.totalPrice
+                });
+            });
         });
     }
 
@@ -37,34 +38,7 @@ export default class Checkout extends Component {
     }
 
     render() {
-        const products = [
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 },
-          { name: '茅台迎宾酒53度（酱香型）', price: 200.00, quantity: 1 },
-          { name: '飞天迎宾酒53度（酱香型）', price: 300.00, quantity: 1 }
-        ];
-
-        const { totalPrice } = this.state;
+        const { totalPrice, products } = this.state;
 
         return (
             <Layout>

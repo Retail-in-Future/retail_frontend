@@ -62,6 +62,7 @@
     "dependencies": {
         "antd": "^2.11.2",
         "autobind-decorator": "^2.1.0",
+        "axios": "^0.16.2",
         "babel-polyfill": "^6.23.0",
         "immutable": "4.0.0-rc.2",
         "lodash": "^4.17.4",
