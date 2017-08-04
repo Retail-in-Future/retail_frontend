@@ -19,7 +19,7 @@ export default class Checkout extends Component {
 
     componentDidMount() {
         this.executeEvery(() => {
-            fetch('http://10.207.22.156:8080/endpoint-retail/').then().catch();
+            // fetch('http://10.207.22.156:8080/endpoint-retail/').then().catch();
         });
     }
 
