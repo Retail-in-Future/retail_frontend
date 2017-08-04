@@ -90,6 +90,9 @@
         },
         "testMatch": [
             "**/*.(spec|test).js"
+        ],
+        "testPathIgnorePatterns": [
+            "./src/pages/checkout/Checkout.spec.js"
         ]
     }
 }
