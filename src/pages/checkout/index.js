@@ -19,12 +19,12 @@ export default class Checkout extends Component {
 
     componentDidMount() {
         this.executeEvery(() => {
-            fetch('http://10.207.22.156:8080/checklist', { mode: 'no-cors' }).then((data) => {
-                console.log('-------- data --------');
-                console.log(data.response);
-                console.log(data.data);
-                console.log(data.body);
-            });
+            // fetch('http://10.207.22.156:8080/checklist', { mode: 'no-cors' }).then((data) => {
+            //     console.log('-------- data --------');
+            //     console.log(data.response);
+            //     console.log(data.data);
+            //     console.log(data.body);
+            // });
         });
     }
 
