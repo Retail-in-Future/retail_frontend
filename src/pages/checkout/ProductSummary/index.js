@@ -27,12 +27,19 @@ const columns = [
 ];
 
 const ProductSummary = ({ products, totalPrice }) => {
-    const totalQuantity = _.chain(products).sumBy(product => product.quantity).value();
+    const productsWithQuantities = _.chain(products)
+      .groupBy('upc')
+      .map(group => ({
+          ...group[0],
+          quantity: group.length
+      }))
+      .value();
+    const totalQuantity = products.length;
 
     return (
         <div>
             <Table
-                dataSource={products}
+                dataSource={productsWithQuantities}
                 columns={columns}
                 pagination={false}
                 scroll={{ y: 800 }}

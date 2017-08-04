@@ -25,7 +25,7 @@ describe('Checkout component', () => {
 
         it('should render a Header component with title 商品清单 when there are products to be checked out', () => {
             const products = [
-                { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 }
+                { name: '茅台王子酒53度（酱香型）', price: 200.00 }
             ];
             component.setState({ products });
 
@@ -43,7 +43,7 @@ describe('Checkout component', () => {
 
         it('should render a ProductSummary when there is(are) product(s) to be checked out', () => {
             const products = [
-                { name: '茅台王子酒53度（酱香型）', price: 200.00, quantity: 2 }
+                { name: '茅台王子酒53度（酱香型）', price: 200.00 }
             ];
             component.setState({ products });
 
