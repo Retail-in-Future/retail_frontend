@@ -5,7 +5,7 @@ import UserGuide from '.';
 import Step from './Step';
 
 describe('UserGuide component', () => {
-    it('should render 4 steps on a user guide', () => {
+    it('should render 4 steps with correct instructions on a user guide', () => {
         const userGuide = shallow(<UserGuide />);
         const steps = userGuide.find(Step);
 
