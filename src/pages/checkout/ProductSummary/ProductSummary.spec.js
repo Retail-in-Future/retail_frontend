@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import { Table } from 'antd';
 
-import Checkout from '.';
+import ProductSummary from '.';
 import Summary from './TotalPrice';
 
 
@@ -18,7 +18,7 @@ describe('ProductSummary component', () => {
             { title: '数量', dataIndex: 'quantity', key: 'quantity' }
         ];
 
-        const component = shallow(<Checkout products={products} />);
+        const component = shallow(<ProductSummary products={products} totalPrice={400.00} />);
         const table = component.find(Table);
 
         expect(table).toHaveLength(1);
@@ -31,7 +31,7 @@ describe('ProductSummary component', () => {
             { name: '茅台迎宾酒53度（酱香型）', price: 200.00, quantity: 2 }
         ];
 
-        const component = shallow(<Checkout products={products} />);
+        const component = shallow(<ProductSummary products={products} totalPrice={800.00} />);
 
         expect(component.find(Table).props().dataSource).toEqual(products);
     });
@@ -43,7 +43,7 @@ describe('ProductSummary component', () => {
             { name: '飞天迎宾酒53度（酱香型）', price: 300.00, quantity: 1 }
         ];
 
-        const component = shallow(<Checkout products={products} />);
+        const component = shallow(<ProductSummary products={products} totalPrice={900.00} />);
         const summary = component.find(Summary);
 
         expect(summary).toHaveLength(1);

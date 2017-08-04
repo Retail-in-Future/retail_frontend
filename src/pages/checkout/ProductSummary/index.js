@@ -26,9 +26,8 @@ const columns = [
     }
 ];
 
-const ProductSummary = ({ products }) => {
+const ProductSummary = ({ products, totalPrice }) => {
     const totalQuantity = _.chain(products).sumBy(product => product.quantity).value();
-    const totalPrice = _.chain(products).sumBy(product => product.quantity * product.price).value();
 
     return (
         <div>
@@ -44,7 +43,8 @@ const ProductSummary = ({ products }) => {
 };
 
 ProductSummary.propTypes = {
-    products: PropTypes.array.isRequired
+    products: PropTypes.array.isRequired,
+    totalPrice: PropTypes.number.isRequired
 };
 
 export default ProductSummary;

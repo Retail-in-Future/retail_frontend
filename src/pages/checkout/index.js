@@ -13,7 +13,8 @@ export default class Checkout extends Component {
     constructor() {
         super();
         this.state = {
-            products: []
+            products: [],
+            totalPrice: 0
         };
     }
 
@@ -63,6 +64,8 @@ export default class Checkout extends Component {
           { name: '飞天迎宾酒53度（酱香型）', price: 300.00, quantity: 1 }
         ];
 
+        const { totalPrice } = this.state;
+
         return (
             <Layout>
                 <Header style={{ position: 'fixed', width: '100%', color: 'white' }}>
@@ -71,7 +74,7 @@ export default class Checkout extends Component {
                 <Content style={{ marginTop: 64, padding: '30px 36px 0 36px' }}>
                     { _.isEmpty(products) ?
                         <UserGuide /> :
-                        <ProductSummary products={products} />
+                        <ProductSummary products={products} totalPrice={totalPrice} />
                     }
                 </Content>
                 <Footer />
