@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { Layout } from 'antd';
 
+import SockJS from 'sockjs-client';
 import _ from 'lodash';
 
 import UserGuide from './UserGuide';
@@ -18,12 +19,8 @@ export default class Checkout extends Component {
     }
 
     componentDidMount() {
-        const socket = new WebSocket('ws://10.207.11.201:10007/checkout/to-be-decided');
-        socket.onmessage = (event) => {
-            this.setState({
-                products: event.data
-            });
-        };
+        console.log('-------- SockJS --------');
+        console.log(SockJS);
     }
 
     render() {
