@@ -7,7 +7,7 @@ import _ from 'lodash';
 import UserGuide from './UserGuide';
 import ProductSummary from './ProductSummary';
 
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 
 export default class Checkout extends Component {
     constructor() {
@@ -74,6 +74,7 @@ export default class Checkout extends Component {
                         <ProductSummary products={products} />
                     }
                 </Content>
+                <Footer />
             </Layout>
         );
     }

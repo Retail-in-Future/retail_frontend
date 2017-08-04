@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 import { Table } from 'antd';
-import Summary from '../Summary';
+import Summary from './TotalPrice/index';
 
 const columns = [
     {

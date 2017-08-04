@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { Table } from 'antd';
 
 import Checkout from '.';
-import Summary from '../Summary';
+import Summary from './TotalPrice';
 
 
 describe('ProductSummary component', () => {
