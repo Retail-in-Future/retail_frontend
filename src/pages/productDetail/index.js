@@ -11,7 +11,7 @@ import {
     appendStock
 } from 'src/redux/actions/productActions';
 import { showModal } from 'src/redux/actions/modalActions';
-import AppendStock from './components/appendStock';
+import AppendSingleStock from './components/appendSingleStock';
 import AppendPrice from './components/appendPrice';
 import styles from './index.scss';
 
@@ -108,7 +108,7 @@ class ProductDetail extends Component {
                 </ul>
                 {
                     modalContentName === 'appendStock'
-                        ? <AppendStock
+                        ? <AppendSingleStock
                             params={this.props.params}
                             stock={this.props.productInfo.amount}
                         />

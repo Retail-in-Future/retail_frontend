@@ -57,8 +57,12 @@ class AppendPrice extends Component {
         this.setState({
             currentStep: 1
         });
-        const finalPrice = parseFloat(this.state.newAppendedPrice);
-        this.props.updateProductPrice(`${this.props.params.sku}/price?price=${finalPrice}`);
+        const price = parseFloat(this.state.newAppendedPrice);
+        const stockInfo = {
+            price,
+            upc: this.props.params.sku
+        };
+        this.props.updateProductPrice(stockInfo);
     }
 
     isValidationFailed = () => {

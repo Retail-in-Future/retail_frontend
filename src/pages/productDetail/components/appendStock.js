@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateProductStock } from 'src/redux/actions/productActions';
+import { updateProductStock, appendProduct } from 'src/redux/actions/productActions';
 import { Form, Steps, Input, Icon } from 'antd';
 import Modal from 'src/components/modal';
 import styles from './appendStock.css';
@@ -18,7 +18,8 @@ const formItemLayout = {
 };
 
 const mapDispatchToProps = {
-    updateProductStock
+    updateProductStock,
+    appendProduct
 };
 
 @connect(null, mapDispatchToProps)
@@ -28,7 +29,8 @@ class AppendStock extends Component {
         form: PropTypes.instanceOf(Object).isRequired,
         params: PropTypes.instanceOf(Object).isRequired,
         stock: PropTypes.number.isRequired,
-        updateProductStock: PropTypes.func.isRequired
+        updateProductStock: PropTypes.func.isRequired,
+        appendProduct: PropTypes.func.isRequired
     };
 
     constructor() {
@@ -37,21 +39,23 @@ class AppendStock extends Component {
     }
 
     handleOk = () => {
+        const stock = this.props.form.getFieldValue('stock');
+        this.props.appendProduct(`${this.props.params.sku}/amount?amount=${stock}`);
         if (this.state.currentStep === 1) {
-            if (this.isValidationFailed()) return true;
-            const stock = this.props.form.getFieldValue('stock');
+            if (this.isValidationFailed()) return false;
             this.setState({ appendedStock: stock });
 
             this.setState({
                 currentStep: 2
             });
+
             const sseUrl = `http://localhost:10002/sse/stocks/${this.props.params.sku}/amount`;
             this.receiveServerEvent(sseUrl);
 
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     receiveServerEvent(sseUrl) {
@@ -66,9 +70,7 @@ class AppendStock extends Component {
         this.setState({
             currentStep: 1
         });
-        const finalStock = parseInt(this.state.newAppendedStock, 10)
-        + parseInt(this.state.appendedStock, 10);
-        this.props.updateProductStock(`${this.props.params.sku}/amount?amount=${finalStock}`);
+        this.props.updateProductStock(this.state.newAppendedStock + this.props.stock);
     }
 
     isValidationFailed = () => {

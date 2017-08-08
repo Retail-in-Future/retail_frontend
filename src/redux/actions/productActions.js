@@ -27,16 +27,22 @@ appendAction(createApiAction, 'appendStock', {
     method: 'get'
 });
 
-appendAction(createApiAction, 'updateProductStock', {
-    url: 'http://localhost:10002/stocks/',
-    method: 'put',
-    parseUrl: true
-});
+// appendAction(createApiAction, 'updateProductStock', {
+//     url: 'http://localhost:10002/stocks/',
+//     method: 'put',
+//     parseUrl: true
+// });
 
 appendAction(createApiAction, 'updateProductPrice', {
-    url: 'http://localhost:10002/stocks/',
-    method: 'put',
-    parseUrl: true
+    url: 'http://localhost:10002/stocks/price/',
+    method: 'put'
 });
 
+appendAction(createApiAction, 'appendProduct', {
+    url: 'http://localhost:10002/stocks/rfid/',
+    method: 'post'
+});
+
+
+appendAction(createNormalAction, 'updateProductStock');
 module.exports = exportActions;

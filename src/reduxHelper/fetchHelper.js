@@ -61,10 +61,10 @@ export default (action) => {
         })
         .catch((error) => {
             console.warn('Promise catch:\n', error);
-            return {
-                type: 'showError',
-                payload: error,
-                meta: actionMeta
-            };
+            // return {
+            //     type: 'showError',
+            //     payload: error,
+            //     meta: actionMeta
+            // };
         });
 };

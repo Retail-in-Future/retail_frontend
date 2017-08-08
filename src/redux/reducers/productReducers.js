@@ -30,12 +30,16 @@ export default handleActions({
         tempState.productInfo = action.payload.data;
         return immutable.fromJS(tempState);
     },
-    updateProductStock_SUCCESS: (state, action) => {
+
+    appendProduct_SUCCESS: (state, action) => {
         const tempState = state.toJS();
-        tempState.productInfo.amount = action.payload.data;
         return immutable.fromJS(tempState);
     },
-
+    updateProductStock: (state, action) => {
+        const tempState = state.toJS();
+        tempState.productInfo.amount = action.payload.INFO_DATA;
+        return immutable.fromJS(tempState);
+    },
     updateProductPrice_SUCCESS: (state, action) => {
         const tempState = state.toJS();
         tempState.productInfo.price = action.payload.data;
