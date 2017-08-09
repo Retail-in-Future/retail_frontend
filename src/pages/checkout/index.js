@@ -20,17 +20,27 @@ export default class Checkout extends Component {
     }
 
     componentDidMount() {
-        this.executeEvery(() => {
-            axios.get('http://10.207.22.156:8080/checklist').then((response) => {
+        const queryCheckoutList = () => {
+            axios.get('http://10.207.11.202:10007/device/0/checklist').then((response) => {
                 this.setState({
                     products: response.data.itemList,
                     totalPrice: response.data.totalPrice
                 });
             });
-        });
+        };
+
+        this.execute(queryCheckoutList).onEveryMilliseconds(500);
     }
 
-    executeEvery(func, milliseconds = 500) {
+    execute(func) {
+        return {
+            onEveryMilliseconds: (interval) => {
+                this.executeEvery(func, interval);
+            }
+        };
+    }
+
+    executeEvery(func, milliseconds) {
         setTimeout(() => {
             func();
             this.executeEvery(func, milliseconds);
