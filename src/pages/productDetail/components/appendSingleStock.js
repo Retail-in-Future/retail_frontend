@@ -84,18 +84,18 @@ class AppendSingleStock extends Component {
                 afterCloseFunction={this.afterClose}
             >
                 <div className={styles.contentWrap}>
-                <ul className={styles.attributes}>
-                    <li>
-                        <span className={styles.label}>已上货数量</span>
-                        <span className={styles.value}>{this.state.appendedStock}</span>
-                        <Button
-                            type="primary"
-                            icon="poweroff"
-                            loading={this.state.iconLoading}
-                            onClick={this.enterIconLoading}
-                        >开始上货</Button>
-                    </li>
-                </ul>
+                    <ul className={styles.attributes}>
+                        <li>
+                            <span className={styles.label}>已上货数量</span>
+                            <span className={styles.value}>{this.state.appendedStock}</span>
+                            <Button
+                                type="primary"
+                                icon="poweroff"
+                                loading={this.state.iconLoading}
+                                onClick={this.enterIconLoading}
+                            >开始上货</Button>
+                        </li>
+                    </ul>
                 </div>
             </Modal>
         );
